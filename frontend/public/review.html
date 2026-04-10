@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpeechSpark - Cùng ôn lại nhé!</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#cdbff0",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#f4eddd",
+                    "tertiary-container": "#e2d5ff",
+                    "inverse-surface": "#333025",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#6cc4fd",
+                    "surface-bright": "#fff9ec",
+                    "surface-container-low": "#faf3e2",
+                    "inverse-primary": "#e8c426",
+                    "primary-fixed-dim": "#e8c426",
+                    "tertiary-fixed": "#e8ddff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#eee8d7",
+                    "primary": "#705d00",
+                    "surface-tint": "#705d00",
+                    "surface-container-highest": "#e9e2d2",
+                    "primary-container": "#ffd93d",
+                    "on-primary-fixed-variant": "#554500",
+                    "outline-variant": "#d0c6ad",
+                    "tertiary": "#635882",
+                    "on-primary-container": "#725e00",
+                    "surface": "#fff9ec",
+                    "on-tertiary": "#ffffff",
+                    "secondary": "#006590",
+                    "outline": "#7e7761",
+                    "on-secondary-container": "#005074",
+                    "on-surface": "#1e1c12",
+                    "on-tertiary-fixed-variant": "#4b4169",
+                    "secondary-fixed": "#c8e6ff",
+                    "primary-fixed": "#ffe173",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#e0dac9",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#f7f0df",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e9e2d2",
+                    "on-tertiary-fixed": "#1f153b",
+                    "on-primary-fixed": "#221b00",
+                    "on-background": "#1e1c12",
+                    "on-surface-variant": "#4d4633",
+                    "secondary-fixed-dim": "#88ceff",
+                    "on-secondary-fixed-variant": "#004c6e",
+                    "on-tertiary-container": "#655a84",
+                    "on-secondary-fixed": "#001e2f",
+                    "background": "#fff9ec",
+                    "warm-coral": "#FF8A80"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Be Vietnam Pro"],
+                    "label": ["Be Vietnam Pro"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background-color: #FFF9EC; color: #1e1c12; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .cloud-shadow { box-shadow: 0 10px 40px rgba(30, 28, 18, 0.06); }
+        .bubble-tip { border-radius: 3rem 3rem 3rem 0.5rem; }
+    </style>
+</head>
+<body class="bg-surface min-h-screen pb-32">
+<!-- Top Navigation Anchor (Manual Suppression Logic: This is a Task-Focused sub-page, so TopNavBar is modified for context) -->
+<header class="sticky top-0 z-50 bg-[#FFF9EC] px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-low text-primary active:scale-95 transition-transform">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="text-xl font-black font-headline text-primary tracking-tight">Cùng ôn lại nhé! 📝</h1>
+</div>
+<div class="w-14 h-14 relative">
+<img alt="Mascot waving" class="w-full h-full object-contain" data-alt="Cute animated yellow bird character waving cheerfully with a soft 3D clay aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrPw0fzE9o5br-Bpdp-DPukdlWtibR_jHHv35iioqWvHUKp28XHRdZok53QTUVdTrlTPeezuAW59VBHrrjRG5Zd4gm7KmGUJf5b89QCAzj1I5W2QTjrJaPOrbf7LO5eWkT3y081SbZGWuTecpkVCBDKlYlZfSE5R2KD5Hg0-mNg3B6D0VPD6ORv_5QCrFxft6fIvP4nCdAKEBYk_y-askJv7yGuSj5Rzvl8p8WQBL84MsHC2iUW1g8mhQGlhjozL8zxQMtfaHdbwvL"/>
+</div>
+</header>
+<main class="max-w-2xl mx-auto px-6 pt-4 space-y-8">
+<!-- Intro Section: Supportive Message -->
+<section class="flex gap-4 items-end">
+<div class="bg-white p-6 bubble-tip cloud-shadow relative border-none">
+<p class="text-on-surface-variant font-medium text-lg leading-relaxed">
+                    Không sao đâu! Sai là để học mà 🌈
+                </p>
+<div class="absolute -left-2 bottom-0 w-4 h-4 bg-white rotate-45 transform origin-bottom-left"></div>
+</div>
+</section>
+<!-- Speed Toggle Section -->
+<section class="bg-surface-container-low rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary">egg</span>
+<span class="font-semibold text-on-surface-variant">Nghe chậm hơn (0.5x)</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-14 h-8 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</section>
+<!-- Error List: Vertical Cards -->
+<section class="space-y-6">
+<!-- Card 1: Pronunciation Error -->
+<div class="bg-surface-container-lowest rounded-xl p-6 cloud-shadow border-none flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<span class="bg-warm-coral/15 text-warm-coral px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Phát âm sai</span>
+<span class="material-symbols-outlined text-outline-variant" data-weight="fill" style="font-variation-settings: 'FILL' 1;">face</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h2 class="text-3xl font-bold font-headline text-on-surface">Con mèo</h2>
+<p class="text-on-surface-variant/60 text-sm font-medium">IPA: /kɔn mɛɔ/</p>
+</div>
+<button class="w-14 h-14 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-2xl">volume_up</span>
+</button>
+</div>
+<button class="w-full py-4 bg-secondary-container/20 text-secondary font-bold rounded-full flex items-center justify-center gap-2 hover:bg-secondary-container/30 transition-colors">
+<span class="material-symbols-outlined">repeat</span>
+                    Luyện lại
+                </button>
+</div>
+<!-- Card 2: Missing Repetition -->
+<div class="bg-surface-container-lowest rounded-xl p-6 cloud-shadow border-none flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<span class="bg-warm-coral/15 text-warm-coral px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Chưa nhắc lại</span>
+<span class="material-symbols-outlined text-outline-variant">record_voice_over</span>
+</div>
+<div class="flex items-center justify-between">
+<h2 class="text-3xl font-bold font-headline text-on-surface">Con chó</h2>
+<button class="w-12 h-12 rounded-full bg-surface-container text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined">campaign</span>
+</button>
+</div>
+<button class="w-full py-4 bg-secondary text-white font-bold rounded-full flex items-center justify-center gap-2 shadow-lg shadow-secondary/20 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">mic</span>
+                    Nói lại
+                </button>
+</div>
+<!-- Card 3: Image Selection Error -->
+<div class="bg-surface-container-lowest rounded-xl p-6 cloud-shadow border-none flex flex-col gap-4">
+<span class="bg-warm-coral/15 text-warm-coral w-fit px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Chọn nhầm hình</span>
+<div class="grid grid-cols-2 gap-4">
+<div class="relative group">
+<div class="absolute top-2 right-2 z-10 bg-error text-white rounded-full p-1">
+<span class="material-symbols-outlined text-xs">close</span>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden bg-surface-container grayscale opacity-60">
+<img alt="Wrong selection" class="w-full h-full object-cover" data-alt="A juicy red apple with a green leaf isolated on a soft pastel background, professional product photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOSOzm88tnPka8q73q5u_BmyV-YRAqjtN103O-BbvjZmK8qQB-VMn2qQV5hy7p6FDs-wZeNLt5fvWrqbNjiVqjx90-IEn20Nup2xt-ScTQTmh7rCxf5shhes8ko-kRQV66AE5ErtfkkywW6faduL6MBsesw5Fp4MwXXnbC3_8HZjzVs3UZL3uWkUnZYBvhGwbvVERX3NjQfxSvH5902h7N0z_Vbao7aSzY7NCLDPXxRWjW0eZ6-dng0trXmvh9BDoOHhzJJP6wHo5Q"/>
+</div>
+<p class="text-center text-xs mt-2 font-medium text-error">Bạn chọn</p>
+</div>
+<div class="relative">
+<div class="absolute top-2 right-2 z-10 bg-secondary text-white rounded-full p-1">
+<span class="material-symbols-outlined text-xs">check</span>
+</div>
+<div class="aspect-square rounded-lg overflow-hidden bg-secondary-container/20 ring-4 ring-secondary/20">
+<img alt="Correct selection" class="w-full h-full object-cover" data-alt="A bunch of bright yellow ripe bananas on a clean minimal background, soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA0z8B4mxBhkupoe4tAmJQlnhiS6eoLbbBjK4rcj96mVMKRqtW39gamMsiczQmNJVWryWAmOsarr7vPZ6QfjMGOgmBP2DFzOoMV_1sDVyg8E1k3vhU3v856E7rqvspJEZOECh_7uRKt2dtFpGvO_RehWI_NOFGSq7eH_rvbNPK3r4X0VWIrQOjzc3L4T58IEQ69oNsH81Bs44gb3wSj-szvtalB0r7j7-VeTsdg4j7qXZ8-HtNnxMsMs-7YPucgg4c0jASs6pjIzit"/>
+</div>
+<p class="text-center text-xs mt-2 font-medium text-secondary">Đáp án đúng</p>
+</div>
+</div>
+<button class="w-full py-4 bg-surface-container text-on-surface-variant font-bold rounded-full flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">cached</span>
+                    Thử lại
+                </button>
+</div>
+<!-- Card 4: Skipped Task -->
+<div class="bg-surface-container-lowest rounded-xl p-6 cloud-shadow border-none flex flex-col gap-4">
+<span class="bg-warm-coral/15 text-warm-coral w-fit px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Bỏ qua câu</span>
+<div class="flex items-center gap-4 bg-surface-container-low p-4 rounded-lg">
+<div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center text-3xl">🧩</div>
+<div>
+<p class="font-bold text-on-surface">Ghép tranh</p>
+<p class="text-xs text-on-surface-variant">Chủ đề: Động vật nông trại</p>
+</div>
+</div>
+<button class="w-full py-4 bg-tertiary-container text-on-tertiary-container font-bold rounded-full flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">menu_book</span>
+                    Xem lại
+                </button>
+</div>
+</section>
+<!-- Main Action CTA -->
+<section class="py-10 text-center">
+<button class="w-full py-5 bg-gradient-to-b from-primary-fixed to-primary-container text-on-primary-fixed font-bold rounded-full shadow-xl shadow-primary/20 active:scale-95 transition-all flex flex-col items-center justify-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined font-bold">repeat</span>
+<span class="text-xl">Luyện lại 3 lần</span>
+</div>
+<span class="text-xs opacity-70 font-medium">Hệ thống sẽ lặp lại với hỗ trợ nhiều hơn</span>
+</button>
+<div class="mt-8">
+<a class="text-secondary font-bold flex items-center justify-center gap-2 hover:underline" href="#">
+<span class="material-symbols-outlined">home</span>
+                    Quay về
+                </a>
+</div>
+</section>
+</main>
+<!-- Navigation Shell: Suppressed for this transactional sub-page per "Semantic Shell Mandate" -->
+<script src="../../backend/js/router.js"></script>
+</body></html>

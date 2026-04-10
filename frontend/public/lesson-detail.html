@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpeechSpark - Con mèo và bạn bè</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#6cc4fd",
+                        "primary": "#705d00",
+                        "error": "#ba1a1a",
+                        "on-primary-fixed": "#221b00",
+                        "on-secondary-fixed": "#001e2f",
+                        "primary-fixed-dim": "#e8c426",
+                        "surface-container-low": "#faf3e2",
+                        "on-tertiary-fixed": "#1f153b",
+                        "on-surface-variant": "#4d4633",
+                        "tertiary-fixed": "#e8ddff",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fff9ec",
+                        "on-surface": "#1e1c12",
+                        "primary-container": "#ffd93d",
+                        "inverse-on-surface": "#f7f0df",
+                        "tertiary-fixed-dim": "#cdbff0",
+                        "surface-container": "#f4eddd",
+                        "on-primary-container": "#725e00",
+                        "surface-container-highest": "#e9e2d2",
+                        "on-background": "#1e1c12",
+                        "surface-variant": "#e9e2d2",
+                        "primary-fixed": "#ffe173",
+                        "outline": "#7e7761",
+                        "outline-variant": "#d0c6ad",
+                        "on-secondary-container": "#005074",
+                        "secondary-fixed": "#c8e6ff",
+                        "on-tertiary-fixed-variant": "#4b4169",
+                        "on-error-container": "#93000a",
+                        "surface-bright": "#fff9ec",
+                        "tertiary": "#635882",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "surface-dim": "#e0dac9",
+                        "on-primary-fixed-variant": "#554500",
+                        "background": "#fff9ec",
+                        "surface-tint": "#705d00",
+                        "inverse-primary": "#e8c426",
+                        "surface-container-high": "#eee8d7",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#333025",
+                        "secondary-fixed-dim": "#88ceff",
+                        "tertiary-container": "#e2d5ff",
+                        "secondary": "#006590",
+                        "on-tertiary-container": "#655a84"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bubble-shape {
+            border-radius: 3rem 3rem 3rem 0.5rem;
+        }
+        .cloud-shadow {
+            box-shadow: 0 40px 40px rgba(30, 28, 18, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-amber-50/80 dark:bg-slate-950/80 backdrop-blur-xl shadow-[0_40px_40px_rgba(0,0,0,0.06)]">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-yellow-700">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-lg text-yellow-700 tracking-tight">Con mèo và bạn bè</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="active:scale-95 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-yellow-700" data-icon="share">share</span>
+</button>
+</div>
+</nav>
+<main class="pt-24 px-6 max-w-2xl mx-auto space-y-8">
+<!-- Hero Section -->
+<section class="relative">
+<div class="bg-surface-container-lowest rounded-xl p-4 cloud-shadow overflow-hidden group">
+<img alt="Cute cats playing" class="w-full h-64 object-cover rounded-lg group-hover:scale-105 transition-transform duration-700" data-alt="a group of whimsical, fluffy cartoon cats playing with colorful yarn balls in a bright, sunlit playroom aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDbGfNyKGAARVziZgCNjp6nzJaIunPGIQmUSPjaEIwUGCGDf_HQExFKP0pTD6KKVbsUb-F0Qodu0eCmlPTX0_6tCRwOMli2aU9ZKfiPHBSYwJFp11VmjBz7DjxJuysZfveEMCspzRrJ_vO3_jaKypUmLCYbhy1x3OrSLo0RmJP-sWyLMcR4G8U1bQs0XepKRH5VI8kK1U38B7LVw-wyWolBNJ8o3Z5-v57u7TxHs568De9v_lSgAn2582Ty__svB4vHOObSB-qQdap"/>
+<div class="absolute top-8 right-8">
+<div class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full font-bold text-sm shadow-lg animate-bounce">
+                        🎉 Mới!
+                    </div>
+</div>
+</div>
+</section>
+<!-- Lesson Info Card -->
+<section class="bg-surface-container-low rounded-xl p-8 space-y-6">
+<div class="flex flex-col gap-2">
+<span class="text-secondary font-bold text-sm tracking-widest uppercase">Mục tiêu:</span>
+<p class="text-xl font-headline font-extrabold text-on-surface">Học tên các con vật và phát âm đúng</p>
+</div>
+<div class="flex flex-wrap gap-3">
+<div class="flex items-center gap-2 bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full font-semibold text-sm">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+                    Trình độ: ⭐ Dễ
+                </div>
+<div class="flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-4 py-2 rounded-full font-semibold text-sm">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                    Thời lượng: 5 phút
+                </div>
+<div class="flex items-center gap-2 bg-primary-fixed text-on-primary-fixed px-4 py-2 rounded-full font-semibold text-sm">
+<span class="material-symbols-outlined text-sm">pets</span>
+                    Chủ đề: 🐱 Động vật
+                </div>
+</div>
+</section>
+<!-- For Parents Section -->
+<section class="bg-tertiary-container/30 rounded-xl p-6 border-2 border-dashed border-tertiary/20">
+<details class="group">
+<summary class="flex justify-between items-center cursor-pointer list-none font-bold text-tertiary">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">assignment</span>
+<span>📋 Dành cho phụ huynh</span>
+</div>
+<span class="material-symbols-outlined group-open:rotate-180 transition-transform">expand_more</span>
+</summary>
+<div class="mt-4 text-on-tertiary-container text-sm leading-relaxed">
+                    Bài học này tập trung vào việc nhận diện âm thanh và hình ảnh của các loài vật nuôi quen thuộc. Qua các trò chơi tương tác, bé sẽ được khuyến khích phát âm các từ đơn giản như "Mèo", "Cún", "Bạn". Hãy khen ngợi khi bé cố gắng nhắc lại nhé!
+                </div>
+</details>
+</section>
+<!-- Activities List -->
+<section class="bg-surface-container-lowest rounded-xl p-8 cloud-shadow">
+<h3 class="font-headline text-xl font-extrabold mb-6 flex items-center gap-3">
+<span class="w-2 h-8 bg-primary rounded-full"></span>
+                Hoạt động trong bài:
+            </h3>
+<div class="space-y-4">
+<!-- Activity 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg group hover:bg-primary-container/20 transition-colors">
+<div class="flex items-center gap-4">
+<span class="text-2xl">🎧</span>
+<span class="font-semibold">Nghe mẫu</span>
+</div>
+<span class="material-symbols-outlined text-emerald-500 font-bold" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<!-- Activity 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg group hover:bg-primary-container/20 transition-colors">
+<div class="flex items-center gap-4">
+<span class="text-2xl">🗣️</span>
+<span class="font-semibold">Nhắc lại</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">circle</span>
+</div>
+<!-- Activity 3 -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg group hover:bg-primary-container/20 transition-colors">
+<div class="flex items-center gap-4">
+<span class="text-2xl">🖼️</span>
+<span class="font-semibold">Chọn đúng hình</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">circle</span>
+</div>
+<!-- Activity 4 -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg group hover:bg-primary-container/20 transition-colors">
+<div class="flex items-center gap-4">
+<span class="text-2xl">💬</span>
+<span class="font-semibold">Nói câu ngắn</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">circle</span>
+</div>
+<!-- Activity 5 -->
+<div class="flex items-center justify-between p-4 bg-surface-container rounded-lg group hover:bg-primary-container/20 transition-colors">
+<div class="flex items-center gap-4">
+<span class="text-2xl">⭐</span>
+<span class="font-semibold">Tổng kết</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant">circle</span>
+</div>
+</div>
+</section>
+<!-- Action Buttons -->
+<section class="flex flex-col gap-4">
+<button class="h-[56px] w-full rounded-full bg-gradient-to-b from-primary-fixed to-primary-container text-on-primary-container font-headline font-extrabold text-lg flex items-center justify-center gap-3 shadow-lg active:scale-[0.98] transition-all">
+<span>🚀 Bắt đầu học</span>
+</button>
+<button class="h-[56px] w-full rounded-full border-2 border-secondary text-secondary font-headline font-extrabold text-lg flex items-center justify-center gap-3 active:scale-[0.98] transition-all">
+<span>🎯 Luyện thử</span>
+</button>
+<div class="flex flex-col items-center gap-4 py-4">
+<button class="text-on-surface-variant font-semibold text-sm flex items-center gap-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">settings</span>
+                    ⚙️ Tùy chỉnh độ khó
+                </button>
+<button class="text-on-surface-variant font-semibold text-sm flex items-center gap-2 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+                    👀 Xem mẫu cho phụ huynh
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#FFF9EC]/90 backdrop-blur-lg shadow-[0_-4px_40px_0_rgba(0,0,0,0.06)] rounded-t-[3rem]">
+    <a href="dashboard.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">videogame_asset</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Chơi</span>
+    </a>
+    <a href="lessons.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">local_library</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thư Viện</span>
+    </a>
+    <a href="results.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">stars</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thành Tựu</span>
+    </a>
+    <a href="admin.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">family_restroom</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Phụ huynh</span>
+    </a>
+</nav>
+<script src="../../backend/js/router.js"></script>
+</body></html>

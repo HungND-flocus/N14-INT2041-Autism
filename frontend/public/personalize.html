@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpeechSpark - Cá nhân hóa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#cdbff0",
+                      "secondary": "#006590",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "on-primary-fixed-variant": "#554500",
+                      "surface-tint": "#705d00",
+                      "inverse-on-surface": "#f7f0df",
+                      "tertiary-container": "#e2d5ff",
+                      "outline": "#7e7761",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#4b4169",
+                      "primary-fixed-dim": "#e8c426",
+                      "on-secondary-fixed": "#001e2f",
+                      "on-surface-variant": "#4d4633",
+                      "surface-container-low": "#faf3e2",
+                      "surface-bright": "#fff9ec",
+                      "surface": "#fff9ec",
+                      "tertiary-fixed": "#e8ddff",
+                      "background": "#fff9ec",
+                      "surface-container-highest": "#e9e2d2",
+                      "on-primary-fixed": "#221b00",
+                      "on-primary-container": "#725e00",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#005074",
+                      "surface-variant": "#e9e2d2",
+                      "on-tertiary": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#d0c6ad",
+                      "on-surface": "#1e1c12",
+                      "surface-dim": "#e0dac9",
+                      "primary": "#705d00",
+                      "secondary-fixed": "#c8e6ff",
+                      "on-tertiary-container": "#655a84",
+                      "inverse-surface": "#333025",
+                      "inverse-primary": "#e8c426",
+                      "on-background": "#1e1c12",
+                      "surface-container-high": "#eee8d7",
+                      "secondary-fixed-dim": "#88ceff",
+                      "secondary-container": "#6cc4fd",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed": "#1f153b",
+                      "primary-container": "#ffd93d",
+                      "surface-container": "#f4eddd",
+                      "tertiary": "#635882",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "primary-fixed": "#ffe173",
+                      "on-error-container": "#93000a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Plus Jakarta Sans"],
+                      "body": ["Be Vietnam Pro"],
+                      "label": ["Be Vietnam Pro"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cloud-shadow {
+            box-shadow: 0 10px 40px rgba(30, 28, 18, 0.06);
+        }
+        .speech-bubble {
+            border-radius: 3rem 3rem 3rem 0.5rem;
+        }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #FFF9EC;
+        }
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-12">
+<!-- TopNavBar -->
+<nav class="w-full sticky top-0 z-50 bg-[#FFF9EC] dark:bg-slate-950 flex justify-between items-center px-6 py-4 max-w-full">
+<div class="flex items-center gap-4">
+<span class="font-headline text-2xl font-extrabold text-primary dark:text-primary-container">SpeechSpark</span>
+</div>
+<!-- Progress Stepper -->
+<div class="flex gap-2">
+<div class="w-3 h-3 rounded-full bg-primary-container"></div>
+<div class="w-8 h-3 rounded-full bg-primary shadow-sm transition-all"></div>
+<div class="w-3 h-3 rounded-full bg-surface-container-highest"></div>
+</div>
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-slate-500 hover:opacity-80 transition-opacity" data-icon="settings">settings</button>
+</div>
+</nav>
+<main class="max-w-4xl mx-auto px-6 pt-8 space-y-12">
+<!-- Title Section -->
+<header class="text-center md:text-left space-y-2">
+<h1 class="text-4xl md:text-5xl font-extrabold text-on-surface tracking-tight">Tùy chỉnh cho bé 🎨</h1>
+<p class="text-on-surface-variant font-medium">Hãy cùng chuẩn bị không gian vui nhộn nhất cho bé nhé!</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Avatar & Character -->
+<div class="lg:col-span-8 space-y-8">
+<!-- Avatar Selector -->
+<section class="bg-surface-container-lowest rounded-xl p-8 cloud-shadow border-none">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="face">face</span>
+                        Chọn ảnh đại diện
+                    </h2>
+<div class="grid grid-cols-4 sm:grid-cols-4 gap-4 md:gap-6">
+<!-- Avatars -->
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-transparent">
+<img alt="Bunny" class="w-16 h-16" data-alt="cute 3d render of a white bunny with pink ears, minimalist toy style, soft lighting, pastel background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzHemse8cH_KBKoiFj3cdutORaV6rD8XiR2PKBnrxPFFuF-Ry7JDEDovLFzMSZOdcCKmaZUUtPqQuG6ZbutiiKrfgR6exIfe7kfzJAfltpK57q5_634XprANnQOZS-5J_LB4FNiLiYJcH52Wvtx7se2wnQIaeWzFqjJW63fqmZos7oIL202MHuGZr3hgOHvq_UFB3BAICnf7-a2v3HcIDxd60eTSkKalrNHy6w17TBN-A7g-DxABGcYBKuipxgQj4-YxEiU_2DVsBL"/>
+</div>
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-primary ring-4 ring-primary-container/30">
+<img alt="Cat" class="w-16 h-16" data-alt="cute 3d render of a ginger kitten with big eyes, minimalist toy style, soft lighting, warm cream background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA39XhzIB20PS2TzFqZkuj8MjYZCn84q2bDj1pNKNKLeiXmk5hr5EaxFeiZKluQoB85zNbnLh-_xG5664K7IHEkP2IISLhOvmUb4Au0pou0-ABc7jb_2AN9QfBxhdTlFefbIXOOp_Mb7Sqapvosb1rBhXYyl8M67TGHSr_UjLA4Q5lP5EvztGkBxqDGHRDFCBwSyJxqQMASe_E4StpRvcv2SJm8napOJP9u-TpmGNf9NESd0I8E3BbraFE_a7ObZrB_lEhOspLDJHw5"/>
+<div class="absolute -top-1 -right-1 bg-primary text-on-primary p-1 rounded-full text-[10px]">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-transparent">
+<img alt="Dog" class="w-16 h-16" data-alt="cute 3d render of a small puppy with floppy ears, minimalist toy style, soft lighting, soft blue background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA47L5dqPWTsCFK9t6sPbJCbW5BgihwhLETVIvSHcSfhjFHeBpA1zbomnk194WVQQH1Ik_b9eSHKOSIDRbNX6aADj7WkOwCxD9dLv7mVYymmEXzOYVOsR6H4B0MPSy4RiTG4jePtCcc4IvpnIAjl7k9bZBRYUPn-tZiW1gJ0vd35nQizwiTlDOsHjxoLPXM7GJ3N-1dxuR_nNSe8dleSTrH3ymMGVfhFsbslc9AGzIKo2lVG72io-DfwCiKxGQWuRRLFanwaLB2D3_R"/>
+</div>
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-transparent">
+<img alt="Bear" class="w-16 h-16" data-alt="cute 3d render of a brown teddy bear, minimalist toy style, soft lighting, soft lavender background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFoB-HhAgfoH-64BbVde60AmuuUaaUUU1YhhOYAPkIibc3KcQ7OhPUcAA0oJIjHBee-xRXGw5xD-UkBQm-oh18WwogKxpp_GSnUzn45LkQcS1vYAuXTTHGwTgNSwcWRps9QFKzTirA49K5Vo5BLERmz9JCfo2xXT8HMFRZ6FFlBWR4nsz9j-zBTcdvgLKOOyaqMKmq320ZAXUQxaNha2jo_-9VF02CiKuB811_avaIAdycwOeaao82Ad-4yba5AMnv1ZIfLwoBLqHB"/>
+</div>
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-transparent">
+<img alt="Owl" class="w-16 h-16" data-alt="cute 3d render of a wise little owl, minimalist toy style, soft lighting, warm forest green background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4QbQXTMaaS0ZJtBD2bRRwJfvdy9rzAgJZlLfEe_zl2emXORVnn4a3zuq2ibBG9hgV4aHyv-WLK3XjTeqnVbV3pWasGEdzF-ejBohZB5APy3bM4LZVaDzS90qhWxCCtZi-XpuSZz8U05XIFbWj5-JsUYbOko68B5dcmR0EzeWIhBXe4NJFEK5qsa6D_OTlueFd_VTG20l6BaiD2RoxBbPAXqXCopAtpdYui5rvyYHn5DkoaDriRpaqWgqMNhWvh-irWAV6fTiFQSZc"/>
+</div>
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-transparent">
+<img alt="Penguin" class="w-16 h-16" data-alt="cute 3d render of a small round penguin, minimalist toy style, soft lighting, icy blue background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGYp5NVXFtQaXCsjec2dLMJgB1zaJ0a84xEtXaizkrbIiIba25rdhDR5d_h-Qfq0KKRUoitRZq0lZmUYG3FAnG4AlXQTo27h01m_ZPzP0GgDYB30Nl1ANUpAJ23hnmR6uniLKem2wB6Za8LW2LF-irm9hoCOuSNUXk2EBrR5OcawWWfGng0qLzPT6mLM9yptoDfIt4lrzSR67OfU_Wh0djXR5xilIOuZ_E7fk7bNbayj7khdPEppnzaD9xWPvAOpjeOaQq3UJmi6uf"/>
+</div>
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-transparent">
+<img alt="Unicorn" class="w-16 h-16" data-alt="cute 3d render of a magical white unicorn with rainbow mane, minimalist toy style, soft lighting, pastel pink background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOI1gAELAfogGoddZy4BneB172woCH3IbZsPUtmXEnZ82tq3_SaEnRjTDu7Tk785tN8QZ_AMUGVaGPAhZ5OMFwAitzZB4TVPVCe14Xk2m9OF2a5YADwREW_Mt27XMqwwxCPkYSFasJDjAxep31GRyjNmoxr5bBNIQufg8ZXaZ7qXl24pTfHamXX3ErhXPT-UluuBPkiQdePsbL2Evwo_5MoAHc1S0-3j9i6gYu247nAXDud9cPmH4pOw4Mkdzo3GCd97HqjM0ZMXRj"/>
+</div>
+<div class="relative group cursor-pointer aspect-square rounded-full bg-surface-container-low flex items-center justify-center hover:scale-105 transition-transform border-4 border-transparent">
+<img alt="Dragon" class="w-16 h-16" data-alt="cute 3d render of a tiny friendly green dragon, minimalist toy style, soft lighting, soft orange background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDen2FzZkibwv7ZDJtpAK9MjvPLDcHOw6kwExBRXqOd3ROeSfxLkWOL34oHjkhY2t8X2IEfYIi2XOWWO4t-n1hsa4zZUIhxJh9mUgm_6kH-ShrXsltC1pbLx_yCD3Eqq6-zN0KmtmGyh85qMJU2qCu043aOB8Ksaz3u-JhcWumQ4mJ_LAnlUACEaJIZttSi8ywfzchCFfpqVDES1wB9iQuAjqxmxbzAUrHuzjKt1PtjSMCEXl8pFj_9raYEPcuxrO5k4cS8Gj7E0DsA"/>
+</div>
+</div>
+</section>
+<!-- Companion Character Selector -->
+<section class="bg-surface-container-lowest rounded-xl p-8 cloud-shadow border-none">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="smart_toy">smart_toy</span>
+                        Chọn bạn đồng hành
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Puppy -->
+<div class="group relative bg-surface-container-low p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-transparent hover:border-secondary-container">
+<div class="w-20 h-20 mx-auto mb-4 bg-surface-container-highest rounded-full flex items-center justify-center">
+<span class="text-4xl">🐾</span>
+</div>
+<span class="block font-bold text-lg text-on-surface">Thú cưng</span>
+<span class="text-xs text-on-surface-variant font-medium">Bạn cún tinh nghịch</span>
+</div>
+<!-- Robot (Selected) -->
+<div class="group relative bg-secondary-container/20 p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-secondary ring-4 ring-secondary-container/10">
+<div class="w-20 h-20 mx-auto mb-4 bg-secondary-container rounded-full flex items-center justify-center">
+<span class="text-4xl">🤖</span>
+</div>
+<span class="block font-bold text-lg text-secondary">Robot</span>
+<span class="text-xs text-secondary-container font-semibold">Siêu trí tuệ vui vẻ</span>
+<div class="absolute top-3 right-3 bg-secondary text-white p-1 rounded-full">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<!-- Superhero -->
+<div class="group relative bg-surface-container-low p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-transparent hover:border-secondary-container">
+<div class="w-20 h-20 mx-auto mb-4 bg-surface-container-highest rounded-full flex items-center justify-center">
+<span class="text-4xl">🦸</span>
+</div>
+<span class="block font-bold text-lg text-on-surface">Siêu nhân</span>
+<span class="text-xs text-on-surface-variant font-medium">Bé anh hùng dũng cảm</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Feedback & Time -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Feedback Mode Selector -->
+<section class="bg-surface-container-lowest rounded-xl p-8 cloud-shadow border-none">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="vibration">vibration</span>
+                        Kiểu phản hồi
+                    </h2>
+<div class="flex flex-col gap-3">
+<button class="w-full py-3 px-6 rounded-full bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex justify-between items-center group">
+<span>🔊 Âm thanh</span>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-tertiary"></div>
+</button>
+<button class="w-full py-3 px-6 rounded-full bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex justify-between items-center group">
+<span>🖼️ Hình ảnh</span>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-tertiary"></div>
+</button>
+<button class="w-full py-3 px-6 rounded-full bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex justify-between items-center group">
+<span>📳 Rung</span>
+<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-tertiary"></div>
+</button>
+<button class="w-full py-3 px-6 rounded-full bg-tertiary-container text-on-tertiary-container font-bold flex justify-between items-center border-2 border-tertiary shadow-sm">
+<span>🎯 Kết hợp</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</div>
+</section>
+<!-- Session Duration -->
+<section class="bg-surface-container-lowest rounded-xl p-8 cloud-shadow border-none">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="timer">timer</span>
+                        Thời lượng
+                    </h2>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center justify-center gap-4">
+<div class="group cursor-pointer w-16 h-16 rounded-full bg-surface-container-low flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="text-xs font-bold leading-none">5</span>
+<span class="text-[8px] font-bold uppercase tracking-widest">Phút</span>
+</div>
+<div class="group cursor-pointer w-24 h-24 rounded-full bg-primary-container flex flex-col items-center justify-center text-on-primary-container scale-110 shadow-lg ring-4 ring-primary-container/20">
+<span class="text-2xl font-black leading-none">10</span>
+<span class="text-xs font-bold uppercase tracking-widest">Phút</span>
+</div>
+<div class="group cursor-pointer w-16 h-16 rounded-full bg-surface-container-low flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="text-xs font-bold leading-none">15</span>
+<span class="text-[8px] font-bold uppercase tracking-widest">Phút</span>
+</div>
+</div>
+</div>
+<p class="text-center mt-6 text-sm text-on-surface-variant font-medium">Bé nên luyện tập đều đặn mỗi ngày</p>
+</section>
+<!-- CTA Buttons -->
+<div class="space-y-4 pt-4">
+<button class="w-full h-16 rounded-full bg-gradient-to-b from-primary-fixed to-primary-container text-on-primary-container font-black text-xl shadow-lg hover:scale-95 active:scale-95 transition-all flex items-center justify-center gap-2 group">
+<span>✅ Hoàn tất</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full h-12 rounded-full text-on-surface-variant font-bold text-sm hover:bg-surface-container-low transition-colors">
+                        ← Quay lại bước trước
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Visual Decor Elements (Floating playroom feel) -->
+<div class="fixed bottom-10 -left-10 w-40 h-40 bg-secondary-container/20 rounded-full blur-3xl -z-10"></div>
+<div class="fixed top-40 -right-20 w-64 h-64 bg-tertiary-container/30 rounded-full blur-[100px] -z-10"></div>
+<div class="fixed bottom-20 right-10 opacity-10 -z-10 rotate-12">
+<span class="material-symbols-outlined text-[120px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        // 1. Avatar Selection
+        const avatarContainer = document.querySelector('.grid-cols-4.sm\\:grid-cols-4') || document.querySelector('.grid-cols-4');
+        if (avatarContainer) {
+            const avatars = avatarContainer.querySelectorAll(':scope > div');
+            avatars.forEach(avatar => {
+                avatar.addEventListener('click', () => {
+                    avatars.forEach(a => {
+                        a.classList.remove('border-primary', 'ring-4', 'ring-primary-container/30');
+                        a.classList.add('border-transparent');
+                        const check = a.querySelector('.absolute');
+                        if (check) check.remove();
+                    });
+                    avatar.classList.remove('border-transparent');
+                    avatar.classList.add('border-primary', 'ring-4', 'ring-primary-container/30');
+                    avatar.insertAdjacentHTML('beforeend', `<div class="absolute -top-1 -right-1 bg-primary text-on-primary p-1 rounded-full text-[10px]">
+                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+                    </div>`);
+                });
+            });
+        }
+    } catch (e) { console.error("Avatar sel error", e); }
+
+    try {
+        // 2. Companion Selection
+        const companionsContainer = document.querySelector('.grid-cols-1.md\\:grid-cols-3');
+        if (companionsContainer) {
+            const companions = companionsContainer.querySelectorAll(':scope > div.group');
+            companions.forEach(comp => {
+                comp.addEventListener('click', () => {
+                    companions.forEach(c => {
+                        c.className = "group relative bg-surface-container-low p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-transparent hover:border-secondary-container";
+                        const check = c.querySelector('.absolute');
+                        if (check) check.remove();
+                        const title = c.querySelector('span.text-secondary') || c.querySelectorAll('span')[1];
+                        const subtitle = c.querySelector('span.text-secondary-container') || c.querySelectorAll('span')[2];
+                        if (title) { title.classList.remove('text-secondary'); title.classList.add('text-on-surface'); }
+                        if (subtitle) { subtitle.classList.remove('text-secondary-container'); subtitle.classList.add('text-on-surface-variant'); }
+                    });
+                    comp.className = "group relative bg-secondary-container/20 p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-secondary ring-4 ring-secondary-container/10";
+                    const title = comp.querySelectorAll('span')[1];
+                    const subtitle = comp.querySelectorAll('span')[2];
+                    if (title) { title.classList.remove('text-on-surface'); title.classList.add('text-secondary'); }
+                    if (subtitle) { subtitle.classList.remove('text-on-surface-variant'); subtitle.classList.add('text-secondary-container'); }
+                    comp.insertAdjacentHTML('beforeend', `<div class="absolute top-3 right-3 bg-secondary text-white p-1 rounded-full">
+                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+                    </div>`);
+                });
+            });
+        }
+    } catch (e) { console.error("Companion sel error", e); }
+
+    try {
+        // 3. Feedback Selection
+        const fbContainerParent = document.querySelector('.flex-col.gap-3');
+        if (fbContainerParent) {
+            const fbContainer = fbContainerParent.querySelectorAll(':scope > button');
+            fbContainer.forEach(fb => {
+                fb.addEventListener('click', () => {
+                    fbContainer.forEach(b => {
+                        b.className = "w-full py-3 px-6 rounded-full bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex justify-between items-center group";
+                        if(b.querySelector('.material-symbols-outlined')) {
+                            b.innerHTML = b.innerHTML.replace(/<span class="material-symbols-outlined.*<\/span>/, '<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-tertiary"></div>');
+                        }
+                    });
+                    fb.className = "w-full py-3 px-6 rounded-full bg-tertiary-container text-on-tertiary-container font-bold flex justify-between items-center border-2 border-tertiary shadow-sm";
+                    fb.innerHTML = fb.innerHTML.replace(/<div.*<\/div>/, '<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: \'FILL\' 1;">check_circle</span>');
+                });
+            });
+        }
+    } catch (e) { console.error("Feedback sel error", e); }
+
+    try {
+        // 4. Timer Selection
+        const timerContainer = document.querySelector('.gap-4');
+        if (timerContainer) {
+            const timerWrappers = timerContainer.querySelectorAll('.w-16, .w-24');
+            timerWrappers.forEach(timer => {
+                timer.addEventListener('click', () => {
+                    timerWrappers.forEach(t => {
+                        t.className = "group cursor-pointer w-16 h-16 rounded-full bg-surface-container-low flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors";
+                        const num = t.querySelector('span:first-child');
+                        if (num) num.className = "text-xs font-bold leading-none";
+                    });
+                    timer.className = "group cursor-pointer w-24 h-24 rounded-full bg-primary-container flex flex-col items-center justify-center text-on-primary-container scale-110 shadow-lg ring-4 ring-primary-container/20";
+                    const num = timer.querySelector('span:first-child');
+                    if (num) num.className = "text-2xl font-black leading-none";
+                });
+            });
+        }
+    } catch (e) { console.error("Timer sel error", e); }
+});
+</script>
+<script src="../../backend/js/router.js"></script>
+</body></html>
