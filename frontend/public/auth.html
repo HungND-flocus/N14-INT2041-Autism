@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpeechSpark - Login &amp; Signup</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary": "#fff2ce",
+                    "on-tertiary": "#f7f0ff",
+                    "primary-dim": "#5f4e00",
+                    "surface-variant": "#d4dfe2",
+                    "on-surface": "#293032",
+                    "outline-variant": "#a7aeb1",
+                    "inverse-surface": "#080f11",
+                    "secondary-fixed": "#a3d8ff",
+                    "surface-dim": "#cbd6da",
+                    "on-background": "#293032",
+                    "inverse-primary": "#fad538",
+                    "secondary-fixed-dim": "#81ccff",
+                    "on-error": "#ffefec",
+                    "surface-container-high": "#dae4e7",
+                    "on-secondary": "#e9f4ff",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#e1eaec",
+                    "primary-fixed": "#fad538",
+                    "on-error-container": "#520c00",
+                    "on-secondary-fixed-variant": "#00567c",
+                    "on-primary-fixed-variant": "#655300",
+                    "secondary": "#00628c",
+                    "tertiary-fixed-dim": "#cabded",
+                    "tertiary-container": "#d8cafb",
+                    "surface-tint": "#6d5a00",
+                    "on-tertiary-fixed-variant": "#554a73",
+                    "surface-bright": "#f1f8fa",
+                    "secondary-dim": "#00557b",
+                    "surface": "#f1f8fa",
+                    "surface-container-highest": "#d4dfe2",
+                    "on-primary-fixed": "#443700",
+                    "background": "#f1f8fa",
+                    "tertiary-fixed": "#d8cafb",
+                    "on-secondary-container": "#004c6f",
+                    "on-tertiary-container": "#4c416a",
+                    "primary": "#6d5a00",
+                    "on-tertiary-fixed": "#382e55",
+                    "secondary-container": "#a3d8ff",
+                    "tertiary": "#60557f",
+                    "primary-container": "#fad538",
+                    "inverse-on-surface": "#979ea0",
+                    "outline": "#71787a",
+                    "error-container": "#f95630",
+                    "on-surface-variant": "#565d5f",
+                    "on-secondary-fixed": "#003853",
+                    "primary-fixed-dim": "#ebc729",
+                    "error-dim": "#b92902",
+                    "surface-container-low": "#eaf2f5",
+                    "tertiary-dim": "#544972",
+                    "error": "#b02500",
+                    "on-primary-container": "#5a4a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Nunito", "Plus Jakarta Sans", "sans-serif"],
+                    "body": ["Nunito", "Plus Jakarta Sans", "sans-serif"],
+                    "label": ["Nunito", "Plus Jakarta Sans", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Nunito', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-[#FFF8E7] min-h-screen flex flex-col selection:bg-primary-container selection:text-primary">
+<!-- TopNavBar -->
+<nav class="bg-slate-50 dark:bg-slate-950 sticky top-0 z-50 transition-colors duration-300">
+<div class="bg-slate-100/50 dark:bg-slate-900/50 backdrop-blur-md">
+<div class="flex justify-between items-center w-full max-w-7xl mx-auto px-6 py-4">
+<div class="text-2xl font-black text-slate-800 dark:text-slate-100 tracking-tighter">
+                    SpeechSpark
+                </div>
+<div class="flex items-center gap-6">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 hover:text-yellow-600 cursor-pointer transition-colors" data-icon="help">help</span>
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400 hover:text-yellow-600 cursor-pointer transition-colors" data-icon="info">info</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center p-6 relative overflow-hidden">
+<!-- Decorative Elements for Tactile Playbook feel -->
+<div class="absolute -top-24 -left-24 w-96 h-96 bg-primary-container/30 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-secondary-container/30 rounded-full blur-3xl"></div>
+<!-- Central Card -->
+<div class="w-full max-w-2xl bg-[#F8F9FA] rounded-lg shadow-[0_12px_40px_rgba(41,48,50,0.06)] overflow-hidden relative z-10 border border-white/50">
+<!-- Tabs Section -->
+<div class="flex border-b border-surface-container bg-surface-container-low">
+<button class="flex-1 py-5 text-center font-bold transition-all duration-300 border-b-4 border-primary text-primary bg-white" id="tab-parent" onclick="switchTab('parent')">
+                    Dành cho Phụ huynh
+                </button>
+<button class="flex-1 py-5 text-center font-bold transition-all duration-300 border-b-4 border-transparent text-on-surface-variant hover:bg-surface-container" id="tab-child" onclick="switchTab('child')">
+                    Dành cho Trẻ em
+                </button>
+</div>
+<div class="p-8 md:p-12">
+<!-- Parent Content -->
+<div class="block animate-in fade-in slide-in-from-bottom-4 duration-500" id="content-parent">
+<div class="text-center mb-10">
+<h1 class="text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-2">Chào mừng Phụ huynh</h1>
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary-container/60 glass-effect border border-secondary-container/40">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="lock" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="text-[10px] uppercase tracking-widest font-bold text-secondary">Hệ thống bảo mật cao</span>
+</div>
+</div>
+<form class="space-y-6">
+<div class="space-y-1.5">
+<label class="text-[11px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Email</label>
+<input class="w-full h-14 px-5 rounded-md bg-surface-container-low border-2 border-tertiary-container/30 focus:border-tertiary-container focus:ring-4 focus:ring-secondary-fixed/40 transition-all outline-none text-on-surface" placeholder="phuhuynh@example.com" type="email"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[11px] uppercase tracking-widest font-bold text-on-surface-variant ml-1">Mật khẩu</label>
+<input class="w-full h-14 px-5 rounded-md bg-surface-container-low border-2 border-tertiary-container/30 focus:border-tertiary-container focus:ring-4 focus:ring-secondary-fixed/40 transition-all outline-none text-on-surface" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex items-center justify-between px-1">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-5 h-5 rounded border-2 border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium text-on-surface-variant group-hover:text-on-surface transition-colors">Ghi nhớ tôi</span>
+</label>
+<a class="text-sm font-bold text-primary hover:underline decoration-2 underline-offset-4" href="#">Quên mật khẩu?</a>
+</div>
+<button type="submit" class="w-full h-14 bg-gradient-to-r from-primary-container to-[#FFD93D] hover:from-[#FFD93D] hover:to-primary-container text-primary-dim font-extrabold rounded-full transition-all active:scale-95 shadow-lg shadow-primary-container/20">
+                            Đăng nhập
+                        </button>
+</form>
+<div class="mt-12 text-center">
+<p class="text-on-surface-variant font-medium">Bạn chưa có tài khoản? <a class="text-primary font-extrabold hover:underline decoration-2 underline-offset-4 ml-1" href="signup.html">Tạo tài khoản mới</a></p>
+</div>
+</div>
+<!-- Child Content -->
+<div class="hidden animate-in fade-in slide-in-from-bottom-4 duration-500" id="content-child">
+<div class="text-center mb-8">
+<div class="inline-block p-4 rounded-full bg-secondary-container/40 mb-4">
+<span class="material-symbols-outlined text-5xl text-secondary" data-icon="face_6" style="font-variation-settings: 'FILL' 1;">face_6</span>
+</div>
+<h1 class="text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight mb-6">Chào bé yêu!</h1>
+<!-- Companion Robot/Puppy -->
+<div class="flex items-center justify-center gap-4 mb-10">
+<div class="relative">
+<img alt="Companion" class="w-20 h-20 bg-surface-variant rounded-full p-2 border-4 border-white shadow-md" data-alt="cute friendly 3D robot character with big expressive eyes and soft rounded edges smiling at the camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEmmgYPCq6vJp-vk9qFWszcvGum8yzTRNaNxQO4VdYVIbuAX67rA6AMi5GfsNnZ_vQdociWmZaN5vpuarbRHkomcRbZdL9pyEuxpoXy41CT95m4sopXsamRKDlpVKXB_TJq7FyuNvXmtTVz2f4qkztsjgsNQWheElHOfBzndi4FH6oXHMlxNYP8fyh9rtKSfc2-MtcuYAlZTTjO7pgMSur8E7nSec3FeCppVJYlxsRmxmgmlXOsPqqJbnyZsMsN251wYIRNtm42n3G"/>
+<div class="absolute -top-1 -right-1 w-5 h-5 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div class="relative bg-white p-4 rounded-2xl shadow-sm border border-surface-container max-w-[240px]">
+<div class="absolute left-[-12px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-r-[12px] border-r-white"></div>
+<p class="text-sm font-bold text-on-surface leading-tight">Chào bé! Chọn hình của mình để vào học nhé!</p>
+</div>
+</div>
+</div>
+<!-- Avatar Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+<button class="group flex flex-col items-center gap-3">
+<div class="w-full aspect-square rounded-2xl bg-orange-100 p-2 border-4 border-transparent group-hover:border-primary-container group-focus:border-primary-container transition-all group-focus:ring-4 group-focus:ring-primary-container/30">
+<img alt="Fox" class="w-full h-full object-contain" data-alt="cute stylized orange fox head avatar for children in a flat playful illustration style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7t6cQPxqUWLD-csDEYIm2tsbQR4yWc1xM2HMx69IIpfKswcdBvuaKy32KqZ4sIo2DJ_o-cWQEZwyqHydeEXzNJhkBguboGSK-X1QbnaEVCRnenkAPvBvsbFfLO1LmSJRyyIOngY9_C8DVVbKAVfIjVLVJJQlxy2YlcfdoBpk_tLKYBgPnvF4uRzgt3Qcakj765THpN1js9PetBVlH-b9k-UYfiji0dO313q13AjAnyn0M2BCvcjNhBjCU3RpHbasbfVgTYp-8MiVO"/>
+</div>
+<span class="text-sm font-bold text-on-surface-variant group-hover:text-primary">Bé Cáo</span>
+</button>
+<button class="group flex flex-col items-center gap-3">
+<div class="w-full aspect-square rounded-2xl bg-blue-100 p-2 border-4 border-transparent group-hover:border-primary-container group-focus:border-primary-container transition-all group-focus:ring-4 group-focus:ring-primary-container/30">
+<img alt="Whale" class="w-full h-full object-contain" data-alt="cute stylized blue whale head avatar for children in a flat playful illustration style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVvqOaaxq4P_kjaICNpYMq9xusfhksIsZ-gzNco0YnJUx-2qynEESZLiU0umIaw9Q7Nm8P4hCeFzFqjNW6B33JhSuzzzMkF_99TLJQByjBtZ4r6-X3m0ER4L5gtgE_PuM-WIM5olv9Vs8MikY4aeKN2Dxv7kpMIV4_X3MR6M5wVnyBraOzK8kIDuiex2gi7PToUSvW4zcqb4Ms4B5HgngxJ1GYjXQABUVCmTkxmufJKzvFfaUpyj2vRdJ_lPHhJOTbUeblkxPXKkfR"/>
+</div>
+<span class="text-sm font-bold text-on-surface-variant group-hover:text-primary">Bé Cá Voi</span>
+</button>
+<button class="group flex flex-col items-center gap-3">
+<div class="w-full aspect-square rounded-2xl bg-green-100 p-2 border-4 border-transparent group-hover:border-primary-container group-focus:border-primary-container transition-all group-focus:ring-4 group-focus:ring-primary-container/30">
+<img alt="Dino" class="w-full h-full object-contain" data-alt="cute stylized green dinosaur head avatar for children in a flat playful illustration style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg-EdClTYvib5fR-cLI_DnowYIQmMfkEXjJa751Cq6tlR4BN7-zjxmPHGhanwRzgZ022n-X6qoeZkOFzzi4u2_MDgviOg9xoO8svBQYhggnFZYWjIQu92jl0DzL0ciMrM7C2ABYdfCYDyDqKVKRYgXYrGIrVfsvMQ1n9SoS71YiO107oMIlUxlgrsqUDNp0U5cSBboyWlulxp-C-qWt9vnc5jRIxWvjBNLsVe3y0FDDGhDV3LHYlRhvqjBckD_4DpupVHxX6PdymZe"/>
+</div>
+<span class="text-sm font-bold text-on-surface-variant group-hover:text-primary">Bé Khủng Long</span>
+</button>
+<button class="group flex flex-col items-center gap-3">
+<div class="w-full aspect-square rounded-2xl bg-purple-100 p-2 border-4 border-transparent group-hover:border-primary-container group-focus:border-primary-container transition-all group-focus:ring-4 group-focus:ring-primary-container/30">
+<img alt="Unicorn" class="w-full h-full object-contain" data-alt="cute stylized purple unicorn head avatar for children in a flat playful illustration style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFK7piBoBLBMMOP05VrqtcPER7WrsFyhifOpfW7eYWnKtcY-GHcleycmOeFHhTNGRlY_uN3ecJ-UFGeHBDFCiidSSA1mJNG8q4ro63MllSMqnbCL7skFzShoycSZ3rg0Wedk_ir1TSENdrN0N2wu4wYn5NVr2lTWBElNarlvAwNpuM4XAq---CKwgDbrpNAvkbm2xNGAaHHk1VpyfWn22k1ot662c5NrrS1OdHyUhd3_qAaNQJ59OK1VdsqcT2NJNa6EnrCcs8EPcJ"/>
+</div>
+<span class="text-sm font-bold text-on-surface-variant group-hover:text-primary">Bé Kỳ Lân</span>
+</button>
+</div>
+<button type="button" onclick="window.location.href='index.html'" class="w-full h-16 bg-secondary hover:bg-secondary-dim text-white font-black text-xl rounded-full transition-all active:scale-95 shadow-xl shadow-secondary/20 flex items-center justify-center gap-3">
+                        Vào học
+                        <span class="material-symbols-outlined text-2xl" data-icon="rocket_launch" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</button>
+<div class="mt-6 text-center">
+    <p class="text-on-surface-variant font-medium text-sm">Bé lần đầu sử dụng ứng dụng? <a class="text-secondary font-extrabold hover:underline decoration-2 underline-offset-4 ml-1" href="onboarding.html">Trải nghiệm ngay!</a></p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-100 dark:bg-slate-900 w-full py-12 px-8 mt-auto transition-colors duration-300">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 w-full max-w-7xl mx-auto">
+<div class="text-sm font-bold text-slate-700 dark:text-slate-300">
+                © 2024 SpeechSpark Editorial Playbook
+            </div>
+<div class="flex gap-8">
+<a class="text-xs uppercase tracking-widest font-medium text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all opacity-80 hover:opacity-100" href="#">Privacy</a>
+<a class="text-xs uppercase tracking-widest font-medium text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all opacity-80 hover:opacity-100" href="#">Terms</a>
+<a class="text-xs uppercase tracking-widest font-medium text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="text-xs uppercase tracking-widest font-medium text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-all opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<script>
+        function switchTab(type) {
+            const parentTab = document.getElementById('tab-parent');
+            const childTab = document.getElementById('tab-child');
+            const parentContent = document.getElementById('content-parent');
+            const childContent = document.getElementById('content-child');
+
+            if (type === 'parent') {
+                parentTab.classList.add('border-primary', 'text-primary', 'bg-white');
+                parentTab.classList.remove('border-transparent', 'text-on-surface-variant', 'hover:bg-surface-container');
+                childTab.classList.remove('border-primary', 'text-primary', 'bg-white');
+                childTab.classList.add('border-transparent', 'text-on-surface-variant', 'hover:bg-surface-container');
+                
+                parentContent.classList.remove('hidden');
+                childContent.classList.add('hidden');
+            } else {
+                childTab.classList.add('border-primary', 'text-primary', 'bg-white');
+                childTab.classList.remove('border-transparent', 'text-on-surface-variant', 'hover:bg-surface-container');
+                parentTab.classList.remove('border-primary', 'text-primary', 'bg-white');
+                parentTab.classList.add('border-transparent', 'text-on-surface-variant', 'hover:bg-surface-container');
+                
+                childContent.classList.remove('hidden');
+                parentContent.classList.add('hidden');
+            }
+        }
+    </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const parentForm = document.querySelector('#content-parent form');
+    if (parentForm) {
+        parentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = parentForm.querySelector('input[type="email"]').value.trim();
+            const passwordInput = parentForm.querySelector('input[type="password"]').value;
+
+            const users = JSON.parse(localStorage.getItem('speechspark_users')) || [];
+            const user = users.find(u => u.email === emailInput && u.password === passwordInput);
+
+            if (user) {
+                alert(`Xin chào ${user.fullname}! Đăng nhập thành công.`);
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Tài khoản hoặc mật khẩu không chính xác!');
+            }
+        });
+    }
+});
+</script>
+</body></html>

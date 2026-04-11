@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng ký - SpeechSpark</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#a3d8ff",
+                      "tertiary-fixed-dim": "#cabded",
+                      "on-surface": "#293032",
+                      "on-primary-fixed-variant": "#655300",
+                      "on-primary-fixed": "#443700",
+                      "tertiary-dim": "#544972",
+                      "on-secondary-fixed": "#003853",
+                      "surface-container-highest": "#d4dfe2",
+                      "secondary-dim": "#00557b",
+                      "tertiary": "#60557f",
+                      "primary-dim": "#5f4e00",
+                      "secondary": "#00628c",
+                      "on-tertiary": "#f7f0ff",
+                      "primary": "#6d5a00",
+                      "inverse-on-surface": "#979ea0",
+                      "secondary-fixed-dim": "#81ccff",
+                      "surface-variant": "#d4dfe2",
+                      "error": "#b02500",
+                      "background": "#f1f8fa",
+                      "on-tertiary-container": "#4c416a",
+                      "on-error-container": "#520c00",
+                      "outline": "#71787a",
+                      "surface-container-high": "#dae4e7",
+                      "outline-variant": "#a7aeb1",
+                      "on-tertiary-fixed": "#382e55",
+                      "surface-container-low": "#eaf2f5",
+                      "primary-fixed": "#fad538",
+                      "surface-container": "#e1eaec",
+                      "error-container": "#f95630",
+                      "on-secondary": "#e9f4ff",
+                      "primary-container": "#fad538",
+                      "tertiary-fixed": "#d8cafb",
+                      "on-primary-container": "#5a4a00",
+                      "on-secondary-container": "#004c6f",
+                      "surface": "#f1f8fa",
+                      "tertiary-container": "#d8cafb",
+                      "inverse-primary": "#fad538",
+                      "secondary-container": "#a3d8ff",
+                      "on-primary": "#fff2ce",
+                      "inverse-surface": "#080f11",
+                      "on-tertiary-fixed-variant": "#554a73",
+                      "error-dim": "#b92902",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-dim": "#cbd6da",
+                      "on-secondary-fixed-variant": "#00567c",
+                      "on-error": "#ffefec",
+                      "on-background": "#293032",
+                      "surface-bright": "#f1f8fa",
+                      "surface-tint": "#6d5a00",
+                      "on-surface-variant": "#565d5f",
+                      "primary-fixed-dim": "#ebc729"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Nunito", "Plus Jakarta Sans", "sans-serif"],
+                      "body": ["Nunito", "Plus Jakarta Sans", "sans-serif"],
+                      "label": ["Plus Jakarta Sans", "sans-serif"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #FFF8E7; /* Cream background as requested */
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 12px 40px rgba(41, 48, 50, 0.06);
+        }
+        .glass-badge {
+            background: rgba(163, 216, 255, 0.6);
+            backdrop-filter: blur(12px);
+        }
+        .soft-inset-input {
+            border: 2px solid #E6E6FA; /* Soft Lavender */
+            border-radius: 14px;
+            transition: all 0.2s ease;
+        }
+        .soft-inset-input:focus {
+            outline: none;
+            border-color: #a3d8ff; /* Sky Blue focus */
+            box-shadow: 0 0 0 4px rgba(163, 216, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- Suppressing Navigation Shell for Transactional Focus -->
+<main class="flex-grow flex items-center justify-center p-6 md:p-12 relative overflow-hidden">
+<!-- Decorative Background Elements for Editorial Feel -->
+<div class="absolute top-[-10%] left-[-5%] w-64 h-64 rounded-full bg-secondary-container/20 blur-3xl"></div>
+<div class="absolute bottom-[-10%] right-[-5%] w-96 h-96 rounded-full bg-primary-container/10 blur-3xl"></div>
+<div class="w-full max-w-[1100px] grid md:grid-cols-2 gap-0 editorial-shadow rounded-lg overflow-hidden bg-surface-container-lowest">
+<!-- Left Side: Branding & Illustration -->
+<div class="hidden md:flex flex-col justify-center p-16 bg-surface-container-low relative">
+<div class="mb-12">
+<span class="text-3xl font-black tracking-tighter text-on-surface">SpeechSpark</span>
+</div>
+<div class="relative mb-8">
+<div class="glass-badge absolute -top-4 -left-4 px-4 py-2 rounded-full flex items-center gap-2 z-10">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">verified_user</span>
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-secondary-container">Parental Trust</span>
+</div>
+<img alt="Happy parent and child interacting" class="rounded-lg object-cover aspect-[4/5] w-full" data-alt="A warm, sunlit illustration of a parent and young child reading a book together in a modern, cozy living room with soft pastel colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0OXPoIdtjABWos-HdlCvxA8_MLhNwPH4dhUMKnS-zh1F5M31zWdslBlNY5kuDHKZPr5wh5l36_nyAzd8woQSzXGT4o8t0sX7JzTglPswVKfdPwaFMgqUsOrJKlpYZiq8NRUmDKw_n-Uw00jNl7OuZcLq_3EGrk5vk0Qmvvl-MGS7gMaPCW41aT9iLcggrlmOmX7DSg4cEzpjLdnx2ljg9_VNNeUqdXpwUfd4IFnAyg0lA1gGtG7dRdBL3mfak2fZhAKHGptLdH33Q"/>
+</div>
+<div class="space-y-4">
+<h2 class="text-2xl font-extrabold text-on-surface leading-tight">Môi trường an toàn cho bé phát triển ngôn ngữ</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">Được thiết kế bởi các chuyên gia ngôn ngữ hàng đầu để giúp con bạn tự tin giao tiếp hơn mỗi ngày.</p>
+</div>
+</div>
+<!-- Right Side: Signup Form -->
+<div class="p-8 md:p-16 flex flex-col justify-center">
+<div class="mb-8">
+<h1 class="text-3xl font-extrabold text-on-surface tracking-tight mb-2">Bắt đầu hành trình cùng con</h1>
+<p class="text-on-surface-variant">Tạo tài khoản phụ huynh để theo dõi tiến trình học tập của bé.</p>
+</div>
+<form class="space-y-5">
+<!-- Form Field: Full Name -->
+<div class="space-y-1.5">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1" for="fullname">Họ và tên</label>
+<input class="w-full px-5 py-3.5 bg-surface-container-lowest soft-inset-input text-on-surface placeholder:text-outline-variant" id="fullname" placeholder="Nguyễn Văn A" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Form Field: Email -->
+<div class="space-y-1.5">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1" for="email">Email</label>
+<input class="w-full px-5 py-3.5 bg-surface-container-lowest soft-inset-input text-on-surface placeholder:text-outline-variant" id="email" placeholder="email@gmail.com" type="email"/>
+</div>
+<!-- Form Field: Phone -->
+<div class="space-y-1.5">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1" for="phone">Số điện thoại</label>
+<input class="w-full px-5 py-3.5 bg-surface-container-lowest soft-inset-input text-on-surface placeholder:text-outline-variant" id="phone" placeholder="0901 234 567" type="tel"/>
+</div>
+</div>
+<!-- Form Field: Username -->
+<div class="space-y-1.5">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1" for="username">Tên tài khoản</label>
+<input class="w-full px-5 py-3.5 bg-surface-container-lowest soft-inset-input text-on-surface placeholder:text-outline-variant" id="username" placeholder="phuhuynh_be_bin" type="text"/>
+</div>
+<!-- Form Field: Password -->
+<div class="space-y-1.5">
+<label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant px-1" for="password">Mật khẩu</label>
+<div class="relative">
+<input class="w-full px-5 py-3.5 bg-surface-container-lowest soft-inset-input text-on-surface placeholder:text-outline-variant" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- Primary CTA -->
+<div class="pt-4">
+<button class="w-full py-4 bg-[#FFD93D] hover:bg-[#fccb00] text-on-primary-fixed font-extrabold text-lg rounded-full transition-all active:scale-[0.98] shadow-lg shadow-primary-container/30" type="submit">
+                            Tạo tài khoản
+                        </button>
+</div>
+<div class="text-center pt-6">
+<a class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors" href="auth.html">
+                            Đã có tài khoản? <span class="text-secondary font-bold">Đăng nhập ngay</span>
+</a>
+</div>
+</form>
+<!-- Editorial Note -->
+<div class="mt-12 pt-8 border-t border-surface-container-highest/50 flex items-start gap-4">
+<div class="p-2 bg-primary-container/30 rounded-lg">
+<span class="material-symbols-outlined text-primary-dim">verified_user</span>
+</div>
+<div>
+<p class="text-[11px] leading-relaxed text-outline">
+                            Bằng cách đăng ký, bạn đồng ý với <a class="underline" href="#">Điều khoản dịch vụ</a> và <a class="underline" href="#">Chính sách bảo mật</a> của SpeechSpark Editorial.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Segment -->
+<footer class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-low/50">
+<div class="text-lg font-black text-on-surface">SpeechSpark</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-xs font-medium uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-xs font-medium uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-xs font-medium uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Cookie Settings</a>
+</div>
+<div class="text-xs font-medium uppercase tracking-widest text-outline">
+            © 2024 SpeechSpark Editorial. All rights reserved.
+        </div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fullname = document.getElementById('fullname').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+
+        if (!fullname || !email || !phone || !username || !password) {
+            alert('Vui lòng điền đầy đủ thông tin!');
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('speechspark_users')) || [];
+        const exists = users.find(u => u.email === email || u.username === username);
+        if (exists) {
+            alert('Email hoặc Tên tài khoản đã tồn tại!');
+            return;
+        }
+
+        users.push({ fullname, email, phone, username, password });
+        localStorage.setItem('speechspark_users', JSON.stringify(users));
+        alert('Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...');
+        window.location.href = 'auth.html';
+    });
+});
+</script>
+</body></html>
