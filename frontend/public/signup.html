@@ -209,10 +209,17 @@
             © 2024 SpeechSpark Editorial. All rights reserved.
         </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // If already logged in, redirect
+    await AuthGuard.redirectIfLoggedIn();
+
     const form = document.querySelector('form');
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const fullname = document.getElementById('fullname').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -225,17 +232,32 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const users = JSON.parse(localStorage.getItem('speechspark_users')) || [];
-        const exists = users.find(u => u.email === email || u.username === username);
-        if (exists) {
-            alert('Email hoặc Tên tài khoản đã tồn tại!');
+        if (password.length < 6) {
+            alert('Mật khẩu phải có ít nhất 6 ký tự!');
             return;
         }
 
-        users.push({ fullname, email, phone, username, password });
-        localStorage.setItem('speechspark_users', JSON.stringify(users));
-        alert('Đăng ký thành công! Đang chuyển hướng đến trang đăng nhập...');
-        window.location.href = 'auth.html';
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Đang tạo tài khoản...';
+
+        try {
+            // Sign up with Supabase (role defaults to 'child', parent can change in admin)
+            await DB.signUp(email, password, fullname, phone, username, 'child');
+
+            // Auto sign in after signup
+            const loginData = await DB.signIn(email, password);
+
+            alert('Đăng ký thành công! Chào mừng bạn đến SpeechSpark! 🌟');
+            
+            // Redirect based on profile completeness (will go to onboarding for new users)
+            const redirect = await AuthGuard.getPostLoginRedirect(loginData.user.id);
+            window.location.href = redirect;
+        } catch (err) {
+            alert('Đăng ký thất bại: ' + err.message);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Tạo tài khoản';
+        }
     });
 });
 </script>

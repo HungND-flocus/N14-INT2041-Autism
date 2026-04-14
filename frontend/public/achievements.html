@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpeechSpark - Thành Tựu Của Bé</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#eee8d7",
+                        "inverse-surface": "#333025",
+                        "outline-variant": "#d0c6ad",
+                        "on-error-container": "#93000a",
+                        "background": "#fff9ec",
+                        "primary-container": "#ffd93d",
+                        "primary-fixed-dim": "#e8c426",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#ffe173",
+                        "on-secondary-container": "#005074",
+                        "on-secondary-fixed": "#001e2f",
+                        "on-primary-container": "#725e00",
+                        "error-container": "#ffdad6",
+                        "on-background": "#1e1c12",
+                        "tertiary-fixed-dim": "#cdbff0",
+                        "on-tertiary-fixed": "#1f153b",
+                        "on-tertiary-container": "#655a84",
+                        "tertiary-fixed": "#e8ddff",
+                        "primary": "#705d00",
+                        "on-secondary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#4d4633",
+                        "inverse-on-surface": "#f7f0df",
+                        "outline": "#7e7761",
+                        "surface-container-highest": "#e9e2d2",
+                        "secondary-fixed": "#c8e6ff",
+                        "surface-bright": "#fff9ec",
+                        "secondary": "#006590",
+                        "on-primary-fixed-variant": "#554500",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#635882",
+                        "surface-dim": "#e0dac9",
+                        "on-tertiary-fixed-variant": "#4b4169",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1e1c12",
+                        "surface-container-low": "#faf3e2",
+                        "secondary-fixed-dim": "#88ceff",
+                        "tertiary-container": "#e2d5ff",
+                        "surface-tint": "#705d00",
+                        "secondary-container": "#6cc4fd",
+                        "on-primary-fixed": "#221b00",
+                        "inverse-primary": "#e8c426",
+                        "surface-variant": "#e9e2d2",
+                        "surface-container": "#f4eddd",
+                        "surface": "#fff9ec",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Be Vietnam Pro"],
+                        "label": ["Be Vietnam Pro"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-shift-surface-container-low {
+            background: linear-gradient(to bottom, #FFF9EC, #FAF3E2);
+        }
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+            background-color: #fff9ec;
+        }
+        h1, h2, h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full z-40 bg-[#FFF9EC]/80 backdrop-blur-2xl shadow-[0_40px_40px_0_rgba(0,0,0,0.06)]">
+<div class="flex items-center justify-between px-6 py-4 w-full">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-[#705D00] text-2xl" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-2xl tracking-tight text-[#705D00]">Thành tựu</h1>
+</div>
+<div class="bg-primary-container px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1">
+<span class="font-bold text-on-primary-container">⭐ 0 Sao</span>
+</div>
+</div>
+</header>
+<main class="px-6 pt-6 space-y-8">
+<!-- Achievement Stats Card -->
+<section class="relative">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_40px_40px_rgba(0,0,0,0.04)] border border-outline-variant/15">
+<div class="flex justify-between items-end mb-4">
+<div>
+<p class="text-on-surface-variant font-medium text-sm mb-1 uppercase tracking-wider">Tiến độ tổng quát</p>
+<h2 class="text-3xl font-extrabold text-on-surface tracking-tight">0/4 huy hiệu</h2>
+</div>
+<div class="bg-tertiary-container p-3 rounded-full">
+<span class="material-symbols-outlined text-tertiary" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+<!-- Progress Seeds -->
+<div class="flex gap-2 items-center">
+<div class="h-3 flex-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full w-[5%] bg-gradient-to-r from-primary to-primary-container rounded-full"></div>
+</div>
+<span class="text-xs font-bold text-tertiary">5%</span>
+</div>
+</div>
+</section>
+<!-- Badge Grid (Bento Style) -->
+<section>
+<h3 class="text-lg font-bold mb-4 px-1 text-on-surface-variant">Bộ sưu tập huy hiệu</h3>
+<div id="badge-grid" class="grid grid-cols-2 gap-4">
+    <!-- Badges will be generated dynamically here -->
+</div>
+</section>
+<!-- Mascot Section -->
+<section class="flex items-start gap-4 py-4">
+<div class="flex-shrink-0 w-20 h-20 rounded-full overflow-hidden bg-primary-container/20 border-2 border-primary-container">
+<img alt="Mascot" class="w-full h-full object-cover" data-alt="A cute, friendly golden retriever puppy cartoon mascot with large expressive eyes and a happy smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkcz7spZRCZgpNuC7ARJ--wV42lZDHBjXO-IoMDlhV-usfJBZkT8ukQe8aBomF7Gy2U1iwU4RNPP8xdguqGUG59OA3zgewj9hVNabrISgV5kcUqyidQkOlIP02yDxpQdLexFTLBnHHTmNWmOw9j6LC8wN7HxDrs0rN4c94ZfdXzGovj8oE__yQB13uVMXclmymq9ALsdcZ9Xux_gl9bal52gBo_6f05sVmjnj1SAsd0Yzy0vS-AseQDOJV3u0aVrsNRYwTlumJY0W5"/>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-tl-lg rounded-tr-xl rounded-br-xl rounded-bl-xl shadow-sm relative border border-outline-variant/10">
+<!-- Speech bubble point -->
+<div class="absolute -left-2 top-4 w-4 h-4 bg-surface-container-lowest border-l border-t border-outline-variant/10 rotate-45"></div>
+<p class="text-on-surface leading-relaxed text-sm font-medium">
+                    Hãy hoàn thành bài học để mở khóa huy hiệu nhé! 🌟
+                </p>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="pt-4">
+<button onclick="window.location.href='lessons.html'" class="w-full h-14 rounded-full bg-gradient-to-b from-primary-fixed to-primary-container text-on-primary-container font-bold text-lg shadow-lg active:scale-[0.98] transition-transform flex items-center justify-center gap-3">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+                Chọn bài học
+            </button>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#FFF9EC]/90 backdrop-blur-lg shadow-[0_-4px_40px_0_rgba(0,0,0,0.06)] rounded-t-[3rem]">
+    <a href="dashboard.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">videogame_asset</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Chơi</span>
+    </a>
+    <a href="lessons.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">local_library</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thư Viện</span>
+    </a>
+    <a href="achievements.html" class="flex flex-col items-center justify-center bg-[#FFD93D] text-[#705D00] rounded-full px-6 py-2 shadow-lg transition-all duration-150">
+        <span class="material-symbols-outlined active-icon" style="font-variation-settings: 'FILL' 1;">stars</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thành Tựu</span>
+    </a>
+    <a href="admin.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">family_restroom</span>
+        <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Phụ huynh</span>
+    </a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    // Top back button
+    document.querySelector('header button').addEventListener('click', () => {
+        window.location.href = 'dashboard.html';
+    });
+
+    const user = await AuthGuard.requireAuth();
+    if (!user) return;
+
+    try {
+        // Sync star count
+        const totalStars = await DB.getTotalStars(user.id);
+        const starEl = document.querySelector('.font-bold.text-on-primary-container');
+        if (starEl) starEl.textContent = `⭐ ${totalStars} Sao`;
+
+        // Check for new badges
+        await DB.checkAndAwardBadges(user.id);
+
+        // Fetch all distinct badges
+        const earnedBadges = await DB.getAchievements(user.id);
+        
+        // Define all possible badges for the UI
+        const badgeDefinitions = [
+            { id: 'nature', name: 'Nhà Thám Hiểm', desc: 'Hoàn thành bài Thiên Nhiên', icon: '🌿' },
+            { id: 'animals', name: 'Bạn Của Muông Thú', desc: 'Hoàn thành bài Động Vật', icon: '🐾' },
+            { id: 'family', name: 'Ngôi Sao Gia Đình', desc: 'Hoàn thành bài Gia Đình', icon: '💕' },
+            { id: 'master', name: 'Siêu Sao Ngôn Ngữ', desc: 'Hoàn thành tất cả bài học', icon: '🏆' }
+        ];
+
+        // Overall progress
+        const overallProgress = await DB.getOverallProgress(user.id);
+        
+        let earnedCount = 0;
+        let badgeHTML = '';
+
+        badgeDefinitions.forEach(bd => {
+            const hasEarned = earnedBadges.some(b => b.badge_name === bd.name || (bd.id && b.badge_name.toLowerCase().includes(bd.id)));
+            if (hasEarned) earnedCount++;
+
+            badgeHTML += `
+            <div class="bg-surface-container-low p-5 rounded-xl flex flex-col items-center text-center relative border ${hasEarned ? 'border-primary shadow-sm' : 'border-outline-variant/10 opacity-60 grayscale'}">
+                ${!hasEarned ? `
+                <div class="absolute top-3 right-3 opacity-80">
+                    <span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+                </div>` : ''}
+                <div class="w-20 h-20 bg-surface-container-highest rounded-full flex items-center justify-center mb-4 ${hasEarned ? 'bg-primary-container' : ''}">
+                    <span class="text-4xl">${bd.icon}</span>
+                </div>
+                <h4 class="font-bold text-on-surface mb-1 leading-tight ${hasEarned ? 'text-primary' : ''}">${bd.name}</h4>
+                <p class="text-[11px] text-on-surface-variant leading-snug">${bd.desc}</p>
+            </div>`;
+        });
+
+        const grid = document.getElementById('badge-grid');
+        if (grid) grid.innerHTML = badgeHTML;
+
+        // Update progress header
+        const statsTitle = document.querySelector('h2.tracking-tight');
+        if (statsTitle) statsTitle.textContent = `${earnedCount}/${badgeDefinitions.length} huy hiệu`;
+
+        const progressBar = document.querySelector('.bg-gradient-to-r.from-primary');
+        if (progressBar) progressBar.style.width = `${overallProgress}%`;
+
+        const progressPct = document.querySelector('.text-xs.font-bold.text-tertiary');
+        if (progressPct) progressPct.textContent = `${overallProgress}%`;
+
+        // Update banner
+        if (earnedCount >= badgeDefinitions.length) {
+            const banner = document.querySelector('.organic-bubble p');
+            if (banner) banner.textContent = 'Tuyệt vời! Con đã mở khóa tất cả huy hiệu!';
+        }
+
+    } catch (err) {
+        console.error('Achievements error:', err);
+    }
+});
+</script>
+</body></html>

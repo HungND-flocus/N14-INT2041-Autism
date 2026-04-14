@@ -1,34 +1,10 @@
-// Mock Supabase Client wrapper
-// In production, replace with: 
-// import { createClient } from '@supabase/supabase-js'
-// export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
+// SpeechSpark - Supabase Client (Real)
+// Requires: <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> loaded first
 
-console.log("Supabase Mock Client Initialized");
+const SUPABASE_URL = 'https://dxggsiadfkwminvcgwqz.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4Z2dzaWFkZmt3bWludmNnd3F6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4MzExNzUsImV4cCI6MjA5MTQwNzE3NX0.v-rIPrndmKkUUeYsGPYRMSa2Kr5t0xxAZNbzeF0AcP8';
 
-export const supabase = {
-    auth: {
-        getUser: async () => ({ data: { user: { id: "mock-user-id" } }, error: null }),
-        signInWithPassword: async () => ({ data: { session: {} }, error: null }),
-        signOut: async () => ({ error: null })
-    },
-    from: (table) => ({
-        select: (columns) => ({
-            eq: async (col, val) => {
-                console.log(`Mock DB Query: SELECT ${columns} FROM ${table} WHERE ${col} = ${val}`);
-                return { data: [], error: null };
-            },
-            async then(resolve) {
-                console.log(`Mock DB Query: SELECT ${columns} FROM ${table}`);
-                resolve({ data: [], error: null });
-            }
-        }),
-        insert: async (data) => {
-            console.log(`Mock DB Insert to ${table}:`, data);
-            return { data: [data], error: null };
-        },
-        update: async (data) => {
-            console.log(`Mock DB Update to ${table}:`, data);
-            return { data: [data], error: null };
-        }
-    })
-};
+// Initialize Supabase client
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+console.log('✅ Supabase Client Initialized');

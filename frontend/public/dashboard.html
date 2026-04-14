@@ -263,7 +263,7 @@
         <span class="material-symbols-outlined">local_library</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thư Viện</span>
     </a>
-    <a href="results.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+    <a href="achievements.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
         <span class="material-symbols-outlined">stars</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thành Tựu</span>
     </a>
@@ -272,5 +272,95 @@
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Phụ huynh</span>
     </a>
 </nav>
-<script src="../../backend/js/router.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const user = await AuthGuard.requireAuth();
+    if (!user) return;
+
+    try {
+        const profile = await DB.getProfile(user.id);
+        
+        // Update greeting with nickname
+        const greeting = document.querySelector('h1.font-headline');
+        if (greeting && profile.nickname) {
+            greeting.textContent = `Chào ${profile.nickname}! 👋`;
+        }
+
+        // Update star count in header
+        const totalStars = await DB.getTotalStars(user.id);
+        // Header uses the tag inside a certain container or we can just be specific
+        const starEl = document.querySelector('header .font-bold.text-secondary');
+        if (starEl) starEl.textContent = `⭐ ${totalStars} Sao`;
+
+        // Update overall progress
+        const overallProgress = await DB.getOverallProgress(user.id);
+        const progressText = document.querySelector('section > .flex > .text-secondary.font-bold');
+        if (progressText) progressText.textContent = `${overallProgress}% Hoàn thành`;
+
+        // Update progress bar width
+        const progressBar = document.querySelector('.bg-gradient-to-r.from-secondary-container');
+        if (progressBar) progressBar.style.width = `${overallProgress}%`;
+
+        // Update lesson cards with real progress
+        const progress = await DB.getProgressForUser(user.id);
+        const lessonCards = document.querySelectorAll('.cloud-shadow.border.border-outline-variant\\/10');
+        
+        const categoryMap = {
+            'nature': { color: 'green', label: 'Thiên Nhiên' },
+            'animals': { color: 'orange', label: 'Thế giới Động vật' },
+            'family': { color: 'blue', label: 'Gia đình thân yêu' }
+        };
+
+        // Update each lesson card
+        for (const p of progress) {
+            if (!p.lessons) continue;
+            const category = p.lessons.category;
+            const pct = p.total_questions > 0 ? Math.round((p.questions_completed / p.total_questions) * 100) : 0;
+
+            // Find the card by its title
+            lessonCards.forEach(card => {
+                const title = card.querySelector('h4');
+                if (!title) return;
+                const info = categoryMap[category];
+                if (info && title.textContent.includes(info.label.split(' ').pop())) {
+                    const bar = card.querySelector('.h-full.rounded-full');
+                    if (bar) bar.style.width = `${pct}%`;
+                    const pctText = card.querySelector('.text-\\[10px\\]');
+                    if (pctText) pctText.textContent = `${pct}%`;
+                    const btn = card.querySelector('button');
+                    if (btn) {
+                        btn.textContent = pct >= 100 ? 'Hoàn thành ✓' : pct > 0 ? 'Tiếp tục' : 'Bắt đầu';
+                        btn.addEventListener('click', () => {
+                            window.location.href = `practice.html?topic=${category}`;
+                        });
+                    }
+                }
+            });
+        }
+
+        // If no progress yet, wire up default buttons
+        lessonCards.forEach(card => {
+            const btn = card.querySelector('button');
+            if (btn && !btn.onclick) {
+                const title = card.querySelector('h4');
+                if (title) {
+                    let topic = 'animals';
+                    if (title.textContent.includes('Thiên')) topic = 'nature';
+                    else if (title.textContent.includes('Gia')) topic = 'family';
+                    btn.addEventListener('click', () => {
+                        window.location.href = `practice.html?topic=${topic}`;
+                    });
+                }
+            }
+        });
+
+    } catch(err) {
+        console.error('Dashboard load error:', err);
+    }
+});
+</script>
 </body></html>

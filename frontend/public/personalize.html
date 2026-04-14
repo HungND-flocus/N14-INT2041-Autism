@@ -265,100 +265,142 @@
 <div class="fixed bottom-20 right-10 opacity-10 -z-10 rotate-12">
 <span class="material-symbols-outlined text-[120px] text-primary" style="font-variation-settings: 'FILL' 1;">star</span>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    try {
-        // 1. Avatar Selection
-        const avatarContainer = document.querySelector('.grid-cols-4.sm\\:grid-cols-4') || document.querySelector('.grid-cols-4');
-        if (avatarContainer) {
-            const avatars = avatarContainer.querySelectorAll(':scope > div');
-            avatars.forEach(avatar => {
-                avatar.addEventListener('click', () => {
-                    avatars.forEach(a => {
-                        a.classList.remove('border-primary', 'ring-4', 'ring-primary-container/30');
-                        a.classList.add('border-transparent');
-                        const check = a.querySelector('.absolute');
-                        if (check) check.remove();
-                    });
-                    avatar.classList.remove('border-transparent');
-                    avatar.classList.add('border-primary', 'ring-4', 'ring-primary-container/30');
-                    avatar.insertAdjacentHTML('beforeend', `<div class="absolute -top-1 -right-1 bg-primary text-on-primary p-1 rounded-full text-[10px]">
-                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
-                    </div>`);
-                });
-            });
-        }
-    } catch (e) { console.error("Avatar sel error", e); }
+const personalizeState = {
+    avatar_url: 'cat',
+    companion_type: 'robot',
+    feedback_mode: 'combined',
+    session_duration_minutes: 10
+};
 
-    try {
-        // 2. Companion Selection
-        const companionsContainer = document.querySelector('.grid-cols-1.md\\:grid-cols-3');
-        if (companionsContainer) {
-            const companions = companionsContainer.querySelectorAll(':scope > div.group');
-            companions.forEach(comp => {
-                comp.addEventListener('click', () => {
-                    companions.forEach(c => {
-                        c.className = "group relative bg-surface-container-low p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-transparent hover:border-secondary-container";
-                        const check = c.querySelector('.absolute');
-                        if (check) check.remove();
-                        const title = c.querySelector('span.text-secondary') || c.querySelectorAll('span')[1];
-                        const subtitle = c.querySelector('span.text-secondary-container') || c.querySelectorAll('span')[2];
-                        if (title) { title.classList.remove('text-secondary'); title.classList.add('text-on-surface'); }
-                        if (subtitle) { subtitle.classList.remove('text-secondary-container'); subtitle.classList.add('text-on-surface-variant'); }
-                    });
-                    comp.className = "group relative bg-secondary-container/20 p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-secondary ring-4 ring-secondary-container/10";
-                    const title = comp.querySelectorAll('span')[1];
-                    const subtitle = comp.querySelectorAll('span')[2];
-                    if (title) { title.classList.remove('text-on-surface'); title.classList.add('text-secondary'); }
-                    if (subtitle) { subtitle.classList.remove('text-on-surface-variant'); subtitle.classList.add('text-secondary-container'); }
-                    comp.insertAdjacentHTML('beforeend', `<div class="absolute top-3 right-3 bg-secondary text-white p-1 rounded-full">
-                        <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
-                    </div>`);
-                });
-            });
-        }
-    } catch (e) { console.error("Companion sel error", e); }
+document.addEventListener('DOMContentLoaded', async () => {
+    const user = await AuthGuard.requireAuth();
+    if (!user) return;
 
+    // Check if already personalized
     try {
-        // 3. Feedback Selection
-        const fbContainerParent = document.querySelector('.flex-col.gap-3');
-        if (fbContainerParent) {
-            const fbContainer = fbContainerParent.querySelectorAll(':scope > button');
-            fbContainer.forEach(fb => {
-                fb.addEventListener('click', () => {
-                    fbContainer.forEach(b => {
-                        b.className = "w-full py-3 px-6 rounded-full bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex justify-between items-center group";
-                        if(b.querySelector('.material-symbols-outlined')) {
-                            b.innerHTML = b.innerHTML.replace(/<span class="material-symbols-outlined.*<\/span>/, '<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-tertiary"></div>');
-                        }
-                    });
-                    fb.className = "w-full py-3 px-6 rounded-full bg-tertiary-container text-on-tertiary-container font-bold flex justify-between items-center border-2 border-tertiary shadow-sm";
-                    fb.innerHTML = fb.innerHTML.replace(/<div.*<\/div>/, '<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: \'FILL\' 1;">check_circle</span>');
-                });
-            });
+        const profile = await DB.getProfile(user.id);
+        if (DB.isPersonalizeComplete(profile)) {
+            window.location.href = 'dashboard.html';
+            return;
         }
-    } catch (e) { console.error("Feedback sel error", e); }
+    } catch(e) {}
 
-    try {
-        // 4. Timer Selection
-        const timerContainer = document.querySelector('.gap-4');
-        if (timerContainer) {
-            const timerWrappers = timerContainer.querySelectorAll('.w-16, .w-24');
-            timerWrappers.forEach(timer => {
-                timer.addEventListener('click', () => {
-                    timerWrappers.forEach(t => {
-                        t.className = "group cursor-pointer w-16 h-16 rounded-full bg-surface-container-low flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors";
-                        const num = t.querySelector('span:first-child');
-                        if (num) num.className = "text-xs font-bold leading-none";
-                    });
-                    timer.className = "group cursor-pointer w-24 h-24 rounded-full bg-primary-container flex flex-col items-center justify-center text-on-primary-container scale-110 shadow-lg ring-4 ring-primary-container/20";
-                    const num = timer.querySelector('span:first-child');
-                    if (num) num.className = "text-2xl font-black leading-none";
+    // 1. Avatar Selection
+    const avatarContainer = document.querySelector('.grid-cols-4');
+    if (avatarContainer) {
+        const avatars = avatarContainer.querySelectorAll(':scope > div');
+        const avatarNames = ['bunny', 'cat', 'dog', 'bear', 'owl', 'penguin', 'unicorn', 'dragon'];
+        avatars.forEach((avatar, idx) => {
+            avatar.addEventListener('click', () => {
+                avatars.forEach(a => {
+                    a.classList.remove('border-primary', 'ring-4', 'ring-primary-container/30');
+                    a.classList.add('border-transparent');
+                    const check = a.querySelector('.absolute');
+                    if (check) check.remove();
                 });
+                avatar.classList.remove('border-transparent');
+                avatar.classList.add('border-primary', 'ring-4', 'ring-primary-container/30');
+                avatar.insertAdjacentHTML('beforeend', `<div class="absolute -top-1 -right-1 bg-primary text-on-primary p-1 rounded-full text-[10px]">
+                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+                </div>`);
+                personalizeState.avatar_url = avatarNames[idx] || 'cat';
             });
-        }
-    } catch (e) { console.error("Timer sel error", e); }
+        });
+    }
+
+    // 2. Companion Selection
+    const companionsContainer = document.querySelector('.grid-cols-1.md\\:grid-cols-3');
+    if (companionsContainer) {
+        const companions = companionsContainer.querySelectorAll(':scope > div.group');
+        const companionTypes = ['pet', 'robot', 'superhero'];
+        companions.forEach((comp, idx) => {
+            comp.addEventListener('click', () => {
+                companions.forEach(c => {
+                    c.className = "group relative bg-surface-container-low p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-transparent hover:border-secondary-container";
+                    const check = c.querySelector('.absolute');
+                    if (check) check.remove();
+                });
+                comp.className = "group relative bg-secondary-container/20 p-6 rounded-lg text-center cursor-pointer transition-all border-4 border-secondary ring-4 ring-secondary-container/10";
+                comp.insertAdjacentHTML('beforeend', `<div class="absolute top-3 right-3 bg-secondary text-white p-1 rounded-full">
+                    <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">check</span>
+                </div>`);
+                personalizeState.companion_type = companionTypes[idx];
+            });
+        });
+    }
+
+    // 3. Feedback Selection
+    const fbContainerParent = document.querySelector('.flex-col.gap-3');
+    if (fbContainerParent) {
+        const fbButtons = fbContainerParent.querySelectorAll(':scope > button');
+        const fbModes = ['audio', 'visual', 'vibration', 'combined'];
+        fbButtons.forEach((fb, idx) => {
+            fb.addEventListener('click', () => {
+                fbButtons.forEach(b => {
+                    b.className = "w-full py-3 px-6 rounded-full bg-surface-container-low text-on-surface font-semibold hover:bg-surface-container-high transition-colors flex justify-between items-center group";
+                    const icon = b.querySelector('.material-symbols-outlined');
+                    if (icon) {
+                        icon.outerHTML = '<div class="w-5 h-5 rounded-full border-2 border-outline-variant group-hover:border-tertiary"></div>';
+                    }
+                });
+                fb.className = "w-full py-3 px-6 rounded-full bg-tertiary-container text-on-tertiary-container font-bold flex justify-between items-center border-2 border-tertiary shadow-sm";
+                const dot = fb.querySelector('div:last-child');
+                if (dot) {
+                    dot.outerHTML = '<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: \'FILL\' 1;">check_circle</span>';
+                }
+                personalizeState.feedback_mode = fbModes[idx];
+            });
+        });
+    }
+
+    // 4. Timer Selection
+    const timerContainer = document.querySelector('.flex.items-center.justify-center.gap-4');
+    if (timerContainer) {
+        const timerWrappers = timerContainer.querySelectorAll('.w-16, .w-24');
+        const durations = [5, 10, 15];
+        timerWrappers.forEach((timer, idx) => {
+            timer.addEventListener('click', () => {
+                timerWrappers.forEach(t => {
+                    t.className = "group cursor-pointer w-16 h-16 rounded-full bg-surface-container-low flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors";
+                    const num = t.querySelector('span:first-child');
+                    if (num) num.className = "text-xs font-bold leading-none";
+                });
+                timer.className = "group cursor-pointer w-24 h-24 rounded-full bg-primary-container flex flex-col items-center justify-center text-on-primary-container scale-110 shadow-lg ring-4 ring-primary-container/20";
+                const num = timer.querySelector('span:first-child');
+                if (num) num.className = "text-2xl font-black leading-none";
+                personalizeState.session_duration_minutes = durations[idx];
+            });
+        });
+    }
+
+    // 5. Complete button
+    const completeBtn = document.querySelector('button.bg-gradient-to-b');
+    if (completeBtn) {
+        completeBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            completeBtn.disabled = true;
+            try {
+                await DB.updateProfile(user.id, personalizeState);
+                window.location.href = 'dashboard.html';
+            } catch(err) {
+                alert('Lỗi lưu cài đặt: ' + err.message);
+                completeBtn.disabled = false;
+            }
+        });
+    }
+
+    // 6. Back button
+    const backBtn = document.querySelector('button.text-on-surface-variant.font-bold.text-sm');
+    if (backBtn) {
+        backBtn.addEventListener('click', () => {
+            window.location.href = 'onboarding.html';
+        });
+    }
 });
 </script>
-<script src="../../backend/js/router.js"></script>
 </body></html>

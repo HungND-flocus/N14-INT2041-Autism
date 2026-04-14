@@ -189,21 +189,96 @@
                 </p>
 </div>
 </section>
-<!-- Section 5: Action Buttons -->
-<section class="flex flex-col items-center gap-4">
-<button class="w-full max-w-xs h-[64px] rounded-full bg-gradient-to-b from-primary-fixed to-primary-container text-on-primary-container font-headline font-extrabold text-xl shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-3">
-<span class="material-symbols-outlined">auto_stories</span>
-                Học bài tiếp
-            </button>
-<button class="w-full max-w-xs h-[56px] rounded-full border-2 border-secondary text-secondary font-headline font-bold text-lg hover:bg-secondary/5 transition-colors flex items-center justify-center gap-3">
-<span class="material-symbols-outlined">search</span>
-                Xem lại lỗi
-            </button>
-<button class="mt-4 text-on-surface-variant font-bold text-sm hover:text-primary transition-colors flex items-center gap-2">
-<span class="material-symbols-outlined text-lg">home</span>
-                Quay về
-            </button>
-</section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // GUARD: Only show results if coming from a completed exercise
+    const resultData = sessionStorage.getItem('last_exercise_result');
+    if (!resultData) {
+        window.location.href = 'dashboard.html';
+        return;
+    }
+
+    const result = JSON.parse(resultData);
+    // Clear so it can't be revisited
+    sessionStorage.removeItem('last_exercise_result');
+
+    // Update score display
+    const percentText = document.querySelector('.font-headline.font-black.text-5xl.text-on-surface');
+    const scoreText = document.querySelector('.block.text-primary.font-black.text-2xl');
+    
+    if (scoreText) scoreText.textContent = `${result.score}/${result.totalQuestions}`;
+    if (percentText) {
+        const pctString = Math.round((result.score / result.totalQuestions) * 100);
+        percentText.textContent = `${pctString}%`;
+    }
+
+    // Update stars display
+    const starsContainer = document.querySelector('.flex.gap-4.justify-center');
+    if (starsContainer) {
+        let starsHTML = '';
+        for (let i = 0; i < 3; i++) {
+            if (i < result.stars) {
+                starsHTML += '<span class="material-symbols-outlined text-5xl text-[#FFD93D]" style="font-variation-settings: \'FILL\' 1;">star</span>';
+            } else {
+                starsHTML += '<span class="material-symbols-outlined text-outline-variant text-4xl">star</span>';
+            }
+        }
+        starsContainer.innerHTML = starsHTML;
+    }
+
+    // Update the feedback message
+    const feedbackP = document.querySelector('.organic-bubble p');
+    if (feedbackP) {
+        const pct = result.score / result.totalQuestions;
+        if (pct >= 1) {
+            feedbackP.textContent = 'Hoàn hảo! Con đã trả lời đúng tất cả các câu hỏi! Tuyệt vời lắm! 🎉🏆';
+        } else if (pct >= 0.66) {
+            feedbackP.textContent = 'Giỏi lắm! Con đã làm rất tốt! Hãy thử lại để đạt điểm tuyệt đối nhé! 🌟';
+        } else {
+            feedbackP.textContent = 'Con đã cố gắng rồi! Hãy luyện tập thêm để giỏi hơn nhé! 💪';
+        }
+    }
+
+    // Update lesson title if visible
+    const headerTitle = document.querySelector('h1, .font-headline.font-extrabold');
+    if (headerTitle && result.lessonTitle) {
+        headerTitle.textContent = `Kết quả: ${result.lessonTitle}`;
+    }
+
+    // Show new badges if any
+    const badgeSection = document.querySelector('section:nth-of-type(3)');
+    if (result.newBadges && result.newBadges.length > 0) {
+        if (badgeSection) {
+            const badgeInner = badgeSection.querySelector('.relative.z-10');
+            if (badgeInner) {
+                const badge = result.newBadges[0]; // just show first one
+                badgeInner.innerHTML = `
+                    <span class="text-tertiary font-bold text-sm uppercase tracking-widest mb-4">Huy hiệu mới!</span>
+                    <div class="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-lg mb-4 ring-8 ring-white/30 text-6xl">
+                        ${badge.icon_url}
+                    </div>
+                    <h3 class="font-headline font-extrabold text-2xl text-on-tertiary-fixed">🏆 ${badge.badge_name}</h3>
+                    <p class="text-on-tertiary-container/80 font-medium">${badge.description}</p>
+                `;
+            }
+        }
+    } else {
+        if (badgeSection) badgeSection.style.display = 'none';
+    }
+
+    // Wire up action buttons
+    const buttons = document.querySelectorAll('section.flex.flex-col.items-center.gap-4 button');
+    if (buttons[0]) {
+        buttons[0].addEventListener('click', () => { window.location.href = 'dashboard.html'; });
+    }
+    if (buttons[1]) {
+        buttons[1].addEventListener('click', () => { window.location.href = 'achievements.html'; });
+    }
+    if (buttons[2]) {
+        buttons[2].addEventListener('click', () => { window.location.href = 'dashboard.html'; });
+    }
+});
+</script>
 </main>
 <!-- Bottom Navigation Shell -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#FFF9EC]/90 backdrop-blur-lg shadow-[0_-4px_40px_0_rgba(0,0,0,0.06)] rounded-t-[3rem]">
@@ -215,8 +290,8 @@
         <span class="material-symbols-outlined">local_library</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thư Viện</span>
     </a>
-    <a href="results.html" class="flex flex-col items-center justify-center bg-[#FFD93D] text-[#705D00] rounded-full px-6 py-2 shadow-lg transition-all duration-150">
-        <span class="material-symbols-outlined active-icon" style="font-variation-settings: 'FILL' 1;">stars</span>
+    <a href="achievements.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+        <span class="material-symbols-outlined">stars</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thành Tựu</span>
     </a>
     <a href="admin.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
@@ -231,5 +306,4 @@
 <div class="confetti bg-tertiary-container top-1/2 left-10 rounded-full" style="transform: rotate(80deg); animation: float 6s linear infinite;"></div>
 <div class="confetti bg-primary top-1/3 right-10 rounded-sm" style="transform: rotate(30deg); animation: float 8s linear infinite;"></div>
 </div>
-<script src="../../backend/js/router.js"></script>
 </body></html>

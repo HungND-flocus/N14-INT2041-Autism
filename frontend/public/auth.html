@@ -256,24 +256,59 @@
             }
         }
     </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Check if already logged in
+    await AuthGuard.redirectIfLoggedIn();
+
+    // Check URL params for role hint
+    const urlParams = new URLSearchParams(window.location.search);
+    const roleHint = urlParams.get('role');
+    if (roleHint === 'parent') {
+        switchTab('parent');
+    }
+
+    // Parent Login Form
     const parentForm = document.querySelector('#content-parent form');
     if (parentForm) {
-        parentForm.addEventListener('submit', (e) => {
+        parentForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const emailInput = parentForm.querySelector('input[type="email"]').value.trim();
             const passwordInput = parentForm.querySelector('input[type="password"]').value;
+            const submitBtn = parentForm.querySelector('button[type="submit"]');
 
-            const users = JSON.parse(localStorage.getItem('speechspark_users')) || [];
-            const user = users.find(u => u.email === emailInput && u.password === passwordInput);
-
-            if (user) {
-                alert(`Xin chào ${user.fullname}! Đăng nhập thành công.`);
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Tài khoản hoặc mật khẩu không chính xác!');
+            if (!emailInput || !passwordInput) {
+                alert('Vui lòng nhập email và mật khẩu!');
+                return;
             }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Đang đăng nhập...';
+
+            try {
+                const data = await DB.signIn(emailInput, passwordInput);
+                const redirect = await AuthGuard.getPostLoginRedirect(data.user.id);
+                window.location.href = redirect;
+            } catch (err) {
+                alert('Đăng nhập thất bại: ' + err.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Đăng nhập';
+            }
+        });
+    }
+
+    // Child avatar login - select an avatar then click "Vào học"
+    const childLoginBtn = document.querySelector('#content-child button[type="button"]');
+    if (childLoginBtn) {
+        childLoginBtn.addEventListener('click', async () => {
+            // For child login, we use a simplified flow
+            // In production this would be PIN-based or parent-assisted
+            alert('Tính năng đăng nhập cho trẻ em sẽ được phụ huynh hỗ trợ. Vui lòng đăng nhập ở tab Phụ huynh.');
+            switchTab('parent');
         });
     }
 });

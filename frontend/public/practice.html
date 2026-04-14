@@ -153,55 +153,29 @@
     <!-- Generated dynamically by JS -->
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
 <script>
-const QUESTIONS = [
-    {
-        word: "Con mèo",
-        speechInstruction: "Hãy nghe và chọn đúng hình con Mèo nhé! 🎧",
-        options: [
-            { id: 1, name: "Con mèo", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCyplteWWcywB_HogWLH95wjso8K_VHo2pnFuorP0dkPKTRPHYyQB7v9EHowXRQpCIQ9zWR5DCC9rJTuWXdRCeiyWBrMxMm2l1NW0ZwA_JHT_c5fyevtmkpnsyh-aqBIXMUXSZ0P1dBshmNLykNs_maruXaW0PvrssYxiG2Dx54PUxOIjL1e63JqLze3xnPQcN9cmzwRfpw_flPhbr_Xmf3bsqNXtuvuDViStXWvvklu0Na2ulr-Pd_HY_gw34KpD_73ZRSndP5ERhh" },
-            { id: 2, name: "Con chó", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBrfe6GYpnklYd4lKawTxkYLLTANwLT0pzHDxgisurl7fKOW3dJ1nywPRiXW-ILCn6A6npVB3sLkfjQAwq4OI641Pghlmdd6x7zDh4ZVfjk-Wd0uhlRzmGzPkcw2o2QAloOfX4SmIe7pBqYgyva3Y0BP1G-OmUGp2mkpQNq0Eav3x6Cc4j8v-sU0qrPF_1pfiZWxz5ocM9Eoo7bBKRCVm3k9Hx_ZinVqP91f7dzcWMUacZtjCoxxHQ-ipURK62oGqOlI0JMrrgR3Mkf" },
-            { id: 3, name: "Con chim", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAx8UV0HUm914_z3GXY8IiQ6kR9hOdpBFyMHUVMU3_DLKlKjuLjscLbH2SCRE-YU9GkZ4RkKUNSde4PrRTCuSCN4xTqm1xSvQhHh9DrLEfQnyhtl04B2HpyH1xg7KcJwkwgAp4-LB_XcZFB_8NrzTYdkfMPDsj59s3HuYGNB0L9NMBGxxUNC7ITdyUiXzx_zeXEV9ZsV4-sDrsSe4r9Ng2ltkbAqFuec0c5gyFQjl-7H16ZduRl0FnUym-fu_5gDC_SJFpc_aRrfVm6" },
-            { id: 4, name: "Con cá", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAMSNyinNKBC_Bh77p80Ipw-gxc_KCtBxuCnL_spUxM7P75flsDUwjXFrKCC4uQ37EgCRU8ERI3EfiSIvRtEzuPuLnfqjFI0YPjAqsMA9I_Kjeys4TT8fiB566e2Tx3pNkHlOlzcLQ3q6cJ_ZTLZxqw4HDdYjLyMY5lsVNspMFDbJxVOLOZ8gi7ca09mY720Pg0CuXC0k-6glI9Sb7pdDSw32j0v9mzy9j_cJJpW07XiSr97PEnRUuOmZvQpxrBuHy7gqI0RZAACPOh" }
-        ],
-        correctId: 1
-    },
-    {
-        word: "Con chó",
-        speechInstruction: "Bây giờ bạn tìm giúp Cún con ở đâu nhé? 🎧",
-        options: [
-            { id: 4, name: "Con cá", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAMSNyinNKBC_Bh77p80Ipw-gxc_KCtBxuCnL_spUxM7P75flsDUwjXFrKCC4uQ37EgCRU8ERI3EfiSIvRtEzuPuLnfqjFI0YPjAqsMA9I_Kjeys4TT8fiB566e2Tx3pNkHlOlzcLQ3q6cJ_ZTLZxqw4HDdYjLyMY5lsVNspMFDbJxVOLOZ8gi7ca09mY720Pg0CuXC0k-6glI9Sb7pdDSw32j0v9mzy9j_cJJpW07XiSr97PEnRUuOmZvQpxrBuHy7gqI0RZAACPOh" },
-            { id: 2, name: "Con chó", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBrfe6GYpnklYd4lKawTxkYLLTANwLT0pzHDxgisurl7fKOW3dJ1nywPRiXW-ILCn6A6npVB3sLkfjQAwq4OI641Pghlmdd6x7zDh4ZVfjk-Wd0uhlRzmGzPkcw2o2QAloOfX4SmIe7pBqYgyva3Y0BP1G-OmUGp2mkpQNq0Eav3x6Cc4j8v-sU0qrPF_1pfiZWxz5ocM9Eoo7bBKRCVm3k9Hx_ZinVqP91f7dzcWMUacZtjCoxxHQ-ipURK62oGqOlI0JMrrgR3Mkf" },
-            { id: 3, name: "Con chim", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAx8UV0HUm914_z3GXY8IiQ6kR9hOdpBFyMHUVMU3_DLKlKjuLjscLbH2SCRE-YU9GkZ4RkKUNSde4PrRTCuSCN4xTqm1xSvQhHh9DrLEfQnyhtl04B2HpyH1xg7KcJwkwgAp4-LB_XcZFB_8NrzTYdkfMPDsj59s3HuYGNB0L9NMBGxxUNC7ITdyUiXzx_zeXEV9ZsV4-sDrsSe4r9Ng2ltkbAqFuec0c5gyFQjl-7H16ZduRl0FnUym-fu_5gDC_SJFpc_aRrfVm6" },
-            { id: 1, name: "Con mèo", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCyplteWWcywB_HogWLH95wjso8K_VHo2pnFuorP0dkPKTRPHYyQB7v9EHowXRQpCIQ9zWR5DCC9rJTuWXdRCeiyWBrMxMm2l1NW0ZwA_JHT_c5fyevtmkpnsyh-aqBIXMUXSZ0P1dBshmNLykNs_maruXaW0PvrssYxiG2Dx54PUxOIjL1e63JqLze3xnPQcN9cmzwRfpw_flPhbr_Xmf3bsqNXtuvuDViStXWvvklu0Na2ulr-Pd_HY_gw34KpD_73ZRSndP5ERhh" }
-        ],
-        correctId: 2
-    },
-    {
-        word: "Con chim",
-        speechInstruction: "Cùng tìm bạn chim màu xanh bay lượn nhé! 🎧",
-        options: [
-            { id: 3, name: "Con chim", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAx8UV0HUm914_z3GXY8IiQ6kR9hOdpBFyMHUVMU3_DLKlKjuLjscLbH2SCRE-YU9GkZ4RkKUNSde4PrRTCuSCN4xTqm1xSvQhHh9DrLEfQnyhtl04B2HpyH1xg7KcJwkwgAp4-LB_XcZFB_8NrzTYdkfMPDsj59s3HuYGNB0L9NMBGxxUNC7ITdyUiXzx_zeXEV9ZsV4-sDrsSe4r9Ng2ltkbAqFuec0c5gyFQjl-7H16ZduRl0FnUym-fu_5gDC_SJFpc_aRrfVm6" },
-            { id: 1, name: "Con mèo", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCyplteWWcywB_HogWLH95wjso8K_VHo2pnFuorP0dkPKTRPHYyQB7v9EHowXRQpCIQ9zWR5DCC9rJTuWXdRCeiyWBrMxMm2l1NW0ZwA_JHT_c5fyevtmkpnsyh-aqBIXMUXSZ0P1dBshmNLykNs_maruXaW0PvrssYxiG2Dx54PUxOIjL1e63JqLze3xnPQcN9cmzwRfpw_flPhbr_Xmf3bsqNXtuvuDViStXWvvklu0Na2ulr-Pd_HY_gw34KpD_73ZRSndP5ERhh" },
-            { id: 4, name: "Con cá", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuAMSNyinNKBC_Bh77p80Ipw-gxc_KCtBxuCnL_spUxM7P75flsDUwjXFrKCC4uQ37EgCRU8ERI3EfiSIvRtEzuPuLnfqjFI0YPjAqsMA9I_Kjeys4TT8fiB566e2Tx3pNkHlOlzcLQ3q6cJ_ZTLZxqw4HDdYjLyMY5lsVNspMFDbJxVOLOZ8gi7ca09mY720Pg0CuXC0k-6glI9Sb7pdDSw32j0v9mzy9j_cJJpW07XiSr97PEnRUuOmZvQpxrBuHy7gqI0RZAACPOh" },
-            { id: 2, name: "Con chó", image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBrfe6GYpnklYd4lKawTxkYLLTANwLT0pzHDxgisurl7fKOW3dJ1nywPRiXW-ILCn6A6npVB3sLkfjQAwq4OI641Pghlmdd6x7zDh4ZVfjk-Wd0uhlRzmGzPkcw2o2QAloOfX4SmIe7pBqYgyva3Y0BP1G-OmUGp2mkpQNq0Eav3x6Cc4j8v-sU0qrPF_1pfiZWxz5ocM9Eoo7bBKRCVm3k9Hx_ZinVqP91f7dzcWMUacZtjCoxxHQ-ipURK62oGqOlI0JMrrgR3Mkf" }
-        ],
-        correctId: 3
-    }
-];
-
+let QUESTIONS = [];
 let currentQ = 0;
 let isAnimating = false;
+let score = 0;
+let currentTopic = 'animals';
+let currentLesson = null;
+let currentUser = null;
 
 function renderQuestion(index) {
     const q = QUESTIONS[index];
-    
+    if (!q) return;
+
     // Update progress numbers
     const progressEl = document.querySelector('.text-on-surface-variant');
     if (progressEl && progressEl.textContent.includes('/')) {
          progressEl.textContent = `${index + 1}/${QUESTIONS.length}`;
     }
-    
+
     // Update progress bar
     const barInner = document.querySelector('.bg-primary-container');
     if (barInner) {
@@ -212,61 +186,57 @@ function renderQuestion(index) {
     // Update speech bubble text
     const bubble = document.querySelector('.speech-bubble p');
     if (bubble) {
-         bubble.textContent = q.speechInstruction;
+         bubble.textContent = q.instruction_text;
     }
-    
+
+    // Parse options from JSONB
+    const options = typeof q.options === 'string' ? JSON.parse(q.options) : q.options;
+
     // Update options container
     const container = document.getElementById('question-container');
     if (!container) return;
     container.innerHTML = '';
-    
-    q.options.forEach(opt => {
+
+    options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = "aspect-square bg-surface-container-lowest rounded-xl cloud-shadow hover:scale-[1.02] transition-all duration-300 flex items-center justify-center p-6 group option-btn";
-        btn.innerHTML = `<img alt="${opt.name}" class="w-full h-full object-contain" src="${opt.image}"/>`;
-        
+        btn.innerHTML = `<span class="text-6xl">${opt.emoji}</span><span class="block mt-2 text-sm font-bold text-on-surface-variant">${opt.name}</span>`;
+        btn.style.cssText = "display:flex;flex-direction:column;align-items:center;justify-content:center;";
+
         btn.addEventListener('click', () => {
              if (isAnimating) return;
-             
+
              // Reset siblings
              document.querySelectorAll('.option-btn').forEach(b => {
                  b.classList.remove('active-card');
                  b.style.boxShadow = "";
              });
-             
+
              btn.classList.add('active-card');
              isAnimating = true;
-             
+
              // Check answer
-             if (opt.id === q.correctId) {
-                 // Success UI
-                 btn.style.boxShadow = "0 0 0 6px #4CAF50"; // Green ring indicating success
-                 
-                 // Create a mini success sound or particle here if desired
-                 
+             if (opt.is_correct) {
+                 score++;
+                 btn.style.boxShadow = "0 0 0 6px #4CAF50";
+
                  setTimeout(() => {
                      isAnimating = false;
                      if (currentQ < QUESTIONS.length - 1) {
                          currentQ++;
                          renderQuestion(currentQ);
-                         
-                         // Optional: add a slight bounce to the container to show refresh
                          container.classList.add('animate-pulse');
                          setTimeout(() => container.classList.remove('animate-pulse'), 500);
                      } else {
-                         // End of lesson, go to results
-                         window.location.href = 'results.html';
+                         finishLesson();
                      }
                  }, 1200);
              } else {
-                 // Fail UI
-                 btn.style.boxShadow = "0 0 0 4px #F44336"; // Red ring
+                 btn.style.boxShadow = "0 0 0 4px #F44336";
                  btn.style.transform = "translateX(5px)";
-                 
                  setTimeout(() => btn.style.transform = "translateX(-5px)", 100);
                  setTimeout(() => btn.style.transform = "translateX(5px)", 200);
                  setTimeout(() => btn.style.transform = "translateX(0)", 300);
-                 
                  setTimeout(() => {
                      btn.style.boxShadow = "";
                      btn.classList.remove('active-card');
@@ -274,14 +244,95 @@ function renderQuestion(index) {
                  }, 800);
              }
         });
-        
+
         container.appendChild(btn);
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Only init if we are on the practice page and not overridden by other scripts
-    renderQuestion(0);
+async function finishLesson() {
+    if (!currentUser || !currentLesson) {
+        window.location.href = 'results.html';
+        return;
+    }
+
+    const totalQuestions = QUESTIONS.length;
+    // Stars: 3 if perfect, 2 if >=66%, 1 if >=33%, 0 otherwise
+    let stars = 0;
+    const pct = score / totalQuestions;
+    if (pct >= 1) stars = 3;
+    else if (pct >= 0.66) stars = 2;
+    else if (pct >= 0.33) stars = 1;
+
+    try {
+        // Save progress
+        await DB.upsertProgress(currentUser.id, currentLesson.id, totalQuestions, totalQuestions, score, stars);
+        await DB.updateTotalStars(currentUser.id);
+
+        // Check for new badges
+        const newBadges = await DB.checkAndAwardBadges(currentUser.id);
+
+        // Store results in sessionStorage for results page
+        sessionStorage.setItem('last_exercise_result', JSON.stringify({
+            topic: currentTopic,
+            lessonTitle: currentLesson.title,
+            score,
+            totalQuestions,
+            stars,
+            newBadges: newBadges.map(b => ({ badge_name: b.badge_name, description: b.description, icon_url: b.icon_url })),
+            timestamp: Date.now()
+        }));
+    } catch(err) {
+        console.error('Error saving progress:', err);
+        // Still store partial results
+        sessionStorage.setItem('last_exercise_result', JSON.stringify({
+            topic: currentTopic,
+            lessonTitle: currentTopic,
+            score,
+            totalQuestions,
+            stars: 0,
+            newBadges: [],
+            timestamp: Date.now()
+        }));
+    }
+
+    window.location.href = 'results.html';
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    currentUser = await AuthGuard.requireAuth();
+    if (!currentUser) return;
+
+    // Get topic from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    currentTopic = urlParams.get('topic') || 'animals';
+
+    try {
+        // Fetch lesson and tasks from DB
+        currentLesson = await DB.getLessonByCategory(currentTopic);
+        if (!currentLesson) {
+            alert('Không tìm thấy bài học!');
+            window.location.href = 'lessons.html';
+            return;
+        }
+
+        const tasks = await DB.getLessonTasks(currentLesson.id);
+        if (!tasks || tasks.length === 0) {
+            alert('Bài học chưa có câu hỏi!');
+            window.location.href = 'lessons.html';
+            return;
+        }
+
+        QUESTIONS = tasks;
+
+        // Update header title
+        const titleEl = document.querySelector('.font-headline.text-on-surface.font-extrabold');
+        if (titleEl) titleEl.textContent = currentLesson.title;
+
+        renderQuestion(0);
+    } catch(err) {
+        console.error('Error loading lesson:', err);
+        alert('Lỗi tải bài học: ' + err.message);
+    }
 });
 </script>
 <!-- Action Row -->
@@ -306,12 +357,12 @@ document.addEventListener('DOMContentLoaded', () => {
 <span class="text-xs font-label text-on-surface-variant font-medium">Gợi ý</span>
 </div>
 </div>
-<button class="px-8 py-2 text-on-surface-variant font-label text-sm hover:underline transition-all">
+<button onclick="if(currentQ < QUESTIONS.length - 1) { currentQ++; renderQuestion(currentQ); } else { finishLesson(); }" class="px-8 py-2 text-on-surface-variant font-label text-sm hover:underline transition-all">
                 Bỏ qua
             </button>
 </section>
 </main>
-<!-- BottomNavBar (from JSON guidance) -->
+<!-- BottomNavBar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#FFF9EC]/90 backdrop-blur-lg shadow-[0_-4px_40px_0_rgba(0,0,0,0.06)] rounded-t-[3rem]">
     <a href="dashboard.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
         <span class="material-symbols-outlined">videogame_asset</span>
@@ -321,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="material-symbols-outlined">local_library</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thư Viện</span>
     </a>
-    <a href="results.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+    <a href="achievements.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
         <span class="material-symbols-outlined">stars</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thành Tựu</span>
     </a>
@@ -333,7 +384,4 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Background Decoration -->
 <div class="fixed -bottom-20 -left-20 w-80 h-80 bg-primary-container/10 rounded-full blur-[80px] -z-10"></div>
 <div class="fixed -top-20 -right-20 w-80 h-80 bg-secondary-container/10 rounded-full blur-[80px] -z-10"></div>
-
-<script type="module" src="../../backend/js/app.js"></script>
-<script src="../../backend/js/router.js"></script>
 </body></html>

@@ -240,7 +240,7 @@
     </div>
 </section>
 </main>
-<!-- Bottom Navigation Bar (Shared Component) -->
+<!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#FFF9EC]/90 backdrop-blur-lg shadow-[0_-4px_40px_0_rgba(0,0,0,0.06)] rounded-t-[3rem]">
     <a href="dashboard.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
         <span class="material-symbols-outlined">videogame_asset</span>
@@ -250,7 +250,7 @@
         <span class="material-symbols-outlined active-icon" style="font-variation-settings: 'FILL' 1;">local_library</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thư Viện</span>
     </a>
-    <a href="results.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
+    <a href="achievements.html" class="flex flex-col items-center justify-center text-[#006590] p-2 hover:bg-[#E2D5FF] rounded-full transition-all duration-200">
         <span class="material-symbols-outlined">stars</span>
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Thành Tựu</span>
     </a>
@@ -259,6 +259,69 @@
         <span class="font-headline text-[11px] font-bold uppercase tracking-wider mt-1">Phụ huynh</span>
     </a>
 </nav>
-<!-- Floating Action Button Contextual Suppressed based on screen type - Not needed here for Library Browser -->
-<script src="../../backend/js/router.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const user = await AuthGuard.requireAuth();
+    if (!user) return;
+
+    try {
+        const progress = await DB.getProgressForUser(user.id);
+        
+        // Map for lesson cards - find them by title text
+        const cardData = [
+            { title: 'Thiên Nhiên', category: 'nature' },
+            { title: 'giới Động vật', category: 'animals' },
+            { title: 'Gia đình', category: 'family' }
+        ];
+
+        // Get all lesson card sections
+        const allCards = document.querySelectorAll('section .group');
+
+        allCards.forEach(card => {
+            const h3 = card.querySelector('h3');
+            if (!h3) return;
+
+            const matched = cardData.find(cd => h3.textContent.includes(cd.title));
+            if (!matched) return;
+
+            // Find progress for this category
+            const lessonProgress = progress.find(p => p.lessons?.category === matched.category);
+            let pct = 0;
+            if (lessonProgress) {
+                pct = lessonProgress.total_questions > 0 
+                    ? Math.round((lessonProgress.questions_completed / lessonProgress.total_questions) * 100) 
+                    : 0;
+            }
+
+            // Update SVG progress circle
+            const progressCircle = card.querySelectorAll('circle')[1];
+            if (progressCircle) {
+                const circumference = 125.6; // 2 * PI * 20
+                const offset = circumference - (circumference * pct / 100);
+                progressCircle.setAttribute('stroke-dashoffset', offset);
+            }
+
+            // Update percentage text
+            const pctSpan = card.querySelector('.absolute.text-\\[10px\\]');
+            if (pctSpan) pctSpan.textContent = `${pct}%`;
+
+            // Update button text & link
+            const btn = card.querySelector('button');
+            if (btn) {
+                btn.textContent = pct >= 100 ? '✓ Hoàn thành' : pct > 0 ? 'Tiếp tục học' : 'Bắt đầu';
+                btn.addEventListener('click', () => {
+                    window.location.href = `practice.html?topic=${matched.category}`;
+                });
+            }
+        });
+
+    } catch(err) {
+        console.error('Lessons load error:', err);
+    }
+});
+</script>
 </body></html>

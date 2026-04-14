@@ -1,29 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Map of button/link text content to destination HTML pages
     const routes = [
-        { text: '🚀 Bắt Đầu', url: 'onboarding.html', exact: false },
-        { text: '👨‍👩‍👧 Phụ huynh', url: 'admin.html', exact: false },
-        { text: 'Tiếp tục', url: 'personalize.html', exact: true },
-        { text: 'Bỏ qua và dùng mặc định', url: 'dashboard.html', exact: false },
-        { text: 'Hoàn tất', url: 'dashboard.html', exact: false },
-        { text: 'Quay lại', url: 'onboarding.html', exact: false },
+        { text: '🚀 Bắt Đầu', url: 'auth.html', exact: false },
+        { text: '👨‍👩‍👧 Phụ huynh', url: 'auth.html?role=parent', exact: false },
         { text: '📖 Học tiếp', url: 'practice.html', exact: false },
         { text: '📚 Chọn bài học', url: 'lessons.html', exact: false },
-        { text: 'Bắt đầu', url: 'lesson-detail.html', exact: true },
-        { text: 'Bắt đầu học', url: 'practice.html', exact: false },
-        { text: 'Bỏ qua', url: 'results.html', exact: true },
+        { text: '📚 Chọn bài', url: 'lessons.html', exact: false },
         { text: 'Học bài tiếp', url: 'dashboard.html', exact: false },
         { text: 'Xem lại lỗi', url: 'review.html', exact: false },
         { text: 'Quay về', url: 'dashboard.html', exact: false },
         { text: 'Luyện lại', url: 'practice.html', exact: false },
         { text: 'Lưu cài đặt', url: 'admin.html', exact: false },
-        { text: 'Tiếp theo', url: 'results.html', exact: false },
         { text: 'Cài đặt', url: 'settings.html', exact: true },
-        // Bottom Nav (English keys used in generated code)
+        // Bottom Nav
         { text: 'Play', url: 'dashboard.html', exact: true },
         { text: 'Library', url: 'lessons.html', exact: true },
-        { text: 'Progress', url: 'results.html', exact: true },
-        { text: 'Milestones', url: 'results.html', exact: true },
+        { text: 'Progress', url: 'achievements.html', exact: true },
+        { text: 'Milestones', url: 'achievements.html', exact: true },
         { text: 'Parents', url: 'admin.html', exact: true }
     ];
 
