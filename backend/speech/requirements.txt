@@ -1,0 +1,6 @@
+sherpa-onnx 
+soundfile 
+numpy 
+huggingface_hub
+librosa
+soundfile
