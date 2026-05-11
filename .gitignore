@@ -1,10 +1,22 @@
+# Project specific
 .agent/
 .stitch/
 .tmp/
 node_modules/
-.DS_Store
 .env
 claude.md
 findings.md
 progress.md
 task_plan.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# OS
+.DS_Store
+Thumbs.db

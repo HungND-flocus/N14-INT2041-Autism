@@ -1,7 +1,7 @@
 # Frontend Architecture SOP
 
 ## Purpose
-Defines the frontend structure, component hierarchy, and interaction patterns for SpeechSpark.
+Defines the frontend structure, component hierarchy, and interaction patterns for FluencyPlus.
 
 ## Technology
 - HTML5 + CSS3 + Vanilla JavaScript

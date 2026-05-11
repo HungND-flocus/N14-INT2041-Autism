@@ -1,4 +1,4 @@
--- SpeechSpark Database Schema
+-- FluencyPlus Database Schema
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 

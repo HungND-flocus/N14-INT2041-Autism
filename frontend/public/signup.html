@@ -3,7 +3,7 @@
 <html class="light" lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Đăng ký - SpeechSpark</title>
+<title>Đăng ký - FluencyPlus</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -118,7 +118,7 @@
 <!-- Left Side: Branding & Illustration -->
 <div class="hidden md:flex flex-col justify-center p-16 bg-surface-container-low relative">
 <div class="mb-12">
-<span class="text-3xl font-black tracking-tighter text-on-surface">SpeechSpark</span>
+<span class="text-3xl font-black tracking-tighter text-on-surface">FluencyPlus</span>
 </div>
 <div class="relative mb-8">
 <div class="glass-badge absolute -top-4 -left-4 px-4 py-2 rounded-full flex items-center gap-2 z-10">
@@ -190,7 +190,7 @@
 </div>
 <div>
 <p class="text-[11px] leading-relaxed text-outline">
-                            Bằng cách đăng ký, bạn đồng ý với <a class="underline" href="#">Điều khoản dịch vụ</a> và <a class="underline" href="#">Chính sách bảo mật</a> của SpeechSpark Editorial.
+                            Bằng cách đăng ký, bạn đồng ý với <a class="underline" href="#">Điều khoản dịch vụ</a> và <a class="underline" href="#">Chính sách bảo mật</a> của FluencyPlus Editorial.
                         </p>
 </div>
 </div>
@@ -199,14 +199,14 @@
 </main>
 <!-- Footer Segment -->
 <footer class="w-full px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface-container-low/50">
-<div class="text-lg font-black text-on-surface">SpeechSpark</div>
+<div class="text-lg font-black text-on-surface">FluencyPlus</div>
 <div class="flex flex-wrap justify-center gap-6">
 <a class="text-xs font-medium uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
 <a class="text-xs font-medium uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
 <a class="text-xs font-medium uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Cookie Settings</a>
 </div>
 <div class="text-xs font-medium uppercase tracking-widest text-outline">
-            © 2024 SpeechSpark Editorial. All rights reserved.
+            © 2024 FluencyPlus Editorial. All rights reserved.
         </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Auto sign in after signup
             const loginData = await DB.signIn(email, password);
 
-            alert('Đăng ký thành công! Chào mừng bạn đến SpeechSpark! 🌟');
+            alert('Đăng ký thành công! Chào mừng bạn đến FluencyPlus! 🌟');
             
             // Redirect based on profile completeness (will go to onboarding for new users)
             const redirect = await AuthGuard.getPostLoginRedirect(loginData.user.id);
