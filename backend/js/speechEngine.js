@@ -1,5 +1,5 @@
 /**
- * Adaptive Web Speech API Engine for SpeechSpark
+ * Adaptive Web Speech API Engine for FluencyPlus
  * Implements the logic defined in backend/architecture/speech-recognition.md
  */
 

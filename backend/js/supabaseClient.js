@@ -1,4 +1,4 @@
-// SpeechSpark - Supabase Client (Real)
+// FluencyPlus - Supabase Client (Real)
 // Requires: <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script> loaded first
 
 const SUPABASE_URL = 'https://dxggsiadfkwminvcgwqz.supabase.co';

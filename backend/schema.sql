@@ -1,4 +1,4 @@
--- Database schema for SpeechSpark: Luyện Nói Vui
+-- Database schema for FluencyPlus: Luyện Nói Vui
 
 -- Enums
 CREATE TYPE user_role AS ENUM ('child', 'parent', 'teacher', 'admin');

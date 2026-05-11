@@ -10,7 +10,7 @@ const state = {
 
 // Application initialization
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log("SpeechSpark App Initialized");
+    console.log("FluencyPlus App Initialized");
     
     // Check if speech engine is supported
     if (!state.speechEngine.isSupported) {

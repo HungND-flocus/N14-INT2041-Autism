@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+sqlmodel
+asyncpg
+supabase
+python-dotenv
+pyjwt
+pydantic-settings

@@ -1,4 +1,4 @@
-// SpeechSpark - Auth Guard
+// FluencyPlus - Auth Guard
 // Requires: supabaseClient.js and db.js loaded first
 // Include this script on pages that require authentication
 

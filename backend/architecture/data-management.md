@@ -1,7 +1,7 @@
 # Backend Architecture SOP: Data Management
 
 ## Purpose
-Handles all data operations for SpeechSpark: user profiles, lesson content, progress tracking.
+Handles all data operations for FluencyPlus: user profiles, lesson content, progress tracking.
 
 ## Data Source
 **Supabase** — PostgreSQL database with Row Level Security.

@@ -1,4 +1,4 @@
-// SpeechSpark - Database Helper Module
+// FluencyPlus - Database Helper Module
 // Requires: supabaseClient.js loaded first (provides global `supabaseClient`)
 
 const DB = {
