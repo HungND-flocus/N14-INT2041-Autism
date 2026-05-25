@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FluencyPlus - Kể chuyện & Điền từ</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../backend/js/supabaseClient.js"></script>
+<script src="../../backend/js/db.js"></script>
+<script src="../../backend/js/authGuard.js"></script>
+<script>
+tailwind.config = {
+    darkMode: 'class',
+    theme: {
+        extend: {
+            colors: {
+                primary: '#705d00',
+                secondary: '#006590',
+                surface: '#fff9ec',
+                'surface-container-low': '#faf3e2',
+                'surface-container': '#f4eddd',
+                'surface-container-high': '#eee8d7',
+                'surface-container-lowest': '#ffffff',
+                'primary-container': '#ffd93d',
+                'secondary-container': '#6cc4fd',
+                tertiary: '#635882',
+                'tertiary-container': '#e2d5ff',
+                outline: '#7e7761',
+                'outline-variant': '#d0c6ad',
+                'on-surface': '#1e1c12',
+                'on-surface-variant': '#4d4633',
+                'on-primary-container': '#725e00',
+                'on-secondary-container': '#005074',
+                'on-tertiary-container': '#655a84',
+                error: '#ba1a1a',
+                'error-container': '#ffdad6'
+            },
+            borderRadius: {
+                DEFAULT: '1rem',
+                lg: '2rem',
+                xl: '3rem',
+                full: '9999px'
+            },
+            fontFamily: {
+                headline: ['Plus Jakarta Sans'],
+                body: ['Be Vietnam Pro']
+            }
+        }
+    }
+}
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; background: #FFF9EC; }
+        h1, h2, h3, h4 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cloud-shadow {
+            box-shadow: 0 24px 60px rgba(30, 28, 18, 0.08);
+        }
+        .speech-bubble {
+            position: relative;
+            background: #ffffff;
+            border-radius: 2rem 2rem 2rem 0.6rem;
+        }
+        .story-segment.active {
+            background: #ffe173;
+            color: #554500;
+            box-shadow: 0 0 0 3px rgba(232, 196, 38, 0.2);
+        }
+        .flashcard-correct {
+            box-shadow: 0 0 0 5px rgba(76, 175, 80, 0.35);
+            transform: translateY(-4px);
+        }
+        .flashcard-wrong {
+            animation: shake 0.35s ease-in-out;
+            box-shadow: 0 0 0 4px rgba(244, 67, 54, 0.22);
+        }
+        .reward-pop {
+            animation: pop 0.4s ease-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            50% { transform: translateX(8px); }
+            75% { transform: translateX(-4px); }
+        }
+        @keyframes pop {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-on-surface min-h-screen pb-32">
+<nav class="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-5 py-4 bg-surface/90 backdrop-blur-md">
+    <div class="flex items-center gap-4">
+        <button id="btn-back" class="w-11 h-11 rounded-full bg-surface-container flex items-center justify-center active:scale-95 transition-transform">
+            <span class="material-symbols-outlined text-primary">arrow_back</span>
+        </button>
+        <div>
+            <p class="text-xs font-semibold tracking-[0.2em] uppercase text-secondary">Chế độ kể chuyện</p>
+            <h1 class="text-lg font-extrabold text-primary">Miu tim bong hoa vang</h1>
+        </div>
+    </div>
+    <div class="text-right">
+        <p id="page-counter" class="text-sm font-bold text-on-surface">Trang 1/3</p>
+        <p id="progress-copy" class="text-xs text-on-surface-variant">Đang đọc tiếp câu chuyện</p>
+    </div>
+</nav>
+
+<main class="max-w-4xl mx-auto px-5 pt-24">
+    <section class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-6 items-start">
+        <div class="space-y-6">
+            <div id="story-stage" class="bg-surface-container-lowest rounded-xl p-5 cloud-shadow overflow-hidden touch-pan-y">
+                <div id="illustration-card" class="rounded-xl bg-gradient-to-br from-secondary-container/40 via-primary-container/30 to-tertiary-container/50 min-h-[260px] md:min-h-[360px] flex flex-col items-center justify-center text-center p-4 md:p-6">
+                    <img id="illustration-image" src="https://placehold.co/800x520.jpg?text=Miu+tim+bong+hoa+vang" alt="Miu tìm bông hoa vàng" class="w-full max-w-3xl aspect-[16/10] rounded-xl object-cover mb-5 cloud-shadow" />
+                    <div id="illustration-emoji" class="text-7xl md:text-8xl mb-4">🐱</div>
+                    <h2 id="illustration-title" class="text-2xl font-extrabold text-primary mb-2">Miu bước ra vườn</h2>
+                    <p id="illustration-caption" class="max-w-md text-on-surface-variant leading-relaxed">Miu nhìn thấy một vườn hoa nhỏ đang tỏa nắng.</p>
+                </div>
+            </div>
+
+            <div class="speech-bubble p-5 cloud-shadow">
+                <div class="flex items-start justify-between gap-4 mb-4">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[0.18em] text-secondary mb-2">Nội dung đang kể</p>
+                        <div id="story-text" class="text-lg leading-9 font-medium"></div>
+                    </div>
+                    <div id="blank-status" class="shrink-0 hidden px-4 py-2 rounded-full bg-tertiary-container text-on-tertiary-container text-sm font-bold">Điền từ</div>
+                </div>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <button id="btn-read-story" class="px-5 py-3 rounded-full bg-secondary-container text-on-secondary-container font-bold active:scale-95 transition-transform flex items-center gap-2">
+                        <span class="material-symbols-outlined">volume_up</span>
+                        Nghe kể
+                    </button>
+                    <button id="btn-replay-answer" class="px-5 py-3 rounded-full bg-surface-container border border-outline-variant text-on-surface font-bold active:scale-95 transition-transform disabled:opacity-50" disabled>
+                        Nghe đáp án đúng
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <aside class="space-y-5">
+            <div class="bg-surface-container-low rounded-xl p-5">
+                <h3 class="text-lg font-extrabold text-primary mb-3">Tiến độ</h3>
+                <div class="h-4 bg-surface-container-high rounded-full overflow-hidden">
+                    <div id="progress-bar" class="h-full bg-gradient-to-r from-secondary-container to-primary-container rounded-full transition-all duration-500" style="width: 33%"></div>
+                </div>
+                <div class="flex items-center justify-between text-sm mt-3 text-on-surface-variant">
+                    <span id="blank-counter">Ô trống 1/3</span>
+                    <span id="attempt-counter">Lượt sai: 0</span>
+                </div>
+            </div>
+
+            <div id="flashcard-panel" class="bg-surface-container-lowest rounded-xl p-5 cloud-shadow hidden">
+                <div class="flex items-center justify-between gap-3 mb-4">
+                    <div>
+                        <p class="text-xs uppercase tracking-[0.18em] font-bold text-tertiary">Chọn đáp án</p>
+                        <h3 class="text-lg font-extrabold text-on-surface">Từ nào đúng để điền vào ô trống?</h3>
+                    </div>
+                </div>
+                <div id="flashcard-grid" class="grid grid-cols-2 gap-3"></div>
+                <p id="feedback-text" class="text-sm font-semibold mt-4 text-on-surface-variant">Chạm vào thẻ để nghe cách đọc.</p>
+            </div>
+
+            <div id="completion-panel" class="bg-primary-container/30 rounded-xl p-6 hidden reward-pop">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center text-3xl">🏅</div>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-[0.18em] text-primary">Hoàn thành</p>
+                        <h3 class="text-xl font-extrabold text-primary">Con đã kể xong câu chuyện!</h3>
+                    </div>
+                </div>
+                <p id="completion-score" class="text-on-primary-container font-semibold mb-4">Điểm: 0/3</p>
+                <div class="bg-white/70 rounded-xl p-4 mb-4">
+                    <p class="font-bold text-on-surface mb-1">Sticker nhận được</p>
+                    <p id="reward-text" class="text-on-surface-variant">Nhận hoa hướng dương siêu sáng.</p>
+                </div>
+                <div class="bg-white/70 rounded-xl p-4 mb-5">
+                    <p class="font-bold text-on-surface mb-1">Gợi ý tiếp theo</p>
+                    <p class="text-on-surface-variant">Thử tiếp câu chuyện: Gấu nâu đi siêu thị.</p>
+                </div>
+                <button id="btn-restart" class="w-full h-12 rounded-full bg-primary text-white font-bold active:scale-95 transition-transform">Chơi lại câu chuyện</button>
+            </div>
+
+            <div class="flex gap-3">
+                <button id="btn-next-page" class="flex-1 h-12 rounded-full bg-primary text-white font-bold active:scale-95 transition-transform disabled:opacity-40" disabled>Trang tiếp</button>
+                <button id="btn-reset-progress" class="h-12 px-5 rounded-full border border-outline-variant text-on-surface font-bold active:scale-95 transition-transform">Đặt lại</button>
+            </div>
+        </aside>
+    </section>
+</main>
+
+<script>
+const DEFAULT_STORY = {
+    id: 'miu-tim-bong-hoa-vang',
+    slug: 'miu-tim-bong-hoa-vang',
+    title: 'Miu tìm bông hoa vàng',
+    targetLanguage: 'vi',
+    rewardSticker: 'Hoa hướng dương vui vẻ',
+    nextSuggestion: 'Gấu nâu đi siêu thị',
+    flashcards: [
+        { id: 'flower', word: 'bông hoa', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Bong+hoa', audio_url: null },
+        { id: 'ball', word: 'quả bóng', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Qua+bong', audio_url: null },
+        { id: 'hat', word: 'cái mũ', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Cai+mu', audio_url: null },
+        { id: 'book', word: 'quyển sách', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Quyen+sach', audio_url: null },
+        { id: 'bee', word: 'ong', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Ong', audio_url: null },
+        { id: 'fish', word: 'cá', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Ca', audio_url: null },
+        { id: 'bird', word: 'chim', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Chim', audio_url: null },
+        { id: 'dog', word: 'chó', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Cho', audio_url: null },
+        { id: 'admire', word: 'ngắm', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Ngam', audio_url: null },
+        { id: 'hide', word: 'trốn', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Tron', audio_url: null },
+        { id: 'sleep', word: 'ngủ', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Ngu', audio_url: null },
+        { id: 'run', word: 'chạy', language_code: 'vi', image_url: 'https://placehold.co/400x400.jpg?text=Chay', audio_url: null }
+    ],
+    pages: [
+        {
+            id: 'page-1',
+            page: 1,
+            emoji: '🐱',
+            illustration_image_url: 'https://placehold.co/800x520.jpg?text=Miu+va+vuon+hoa',
+            title: 'Miu bước ra vườn',
+            caption: 'Buổi sáng, Miu nghe mùi hoa thơm thoảng qua.',
+            blanks: [{
+                id: 'page1-blank1',
+                prompt: 'Miu nhìn thấy gì trong vườn?',
+                segment_before: 'Buổi sáng, Miu đi ra vườn và thấy một ',
+                segment_after: ' vàng đang lung linh dưới nắng.',
+                correct_flashcard_id: 'flower',
+                distractor_ids: ['ball', 'hat', 'book']
+            }]
+        },
+        {
+            id: 'page-2',
+            page: 2,
+            emoji: '🐝',
+            illustration_image_url: 'https://placehold.co/800x520.jpg?text=Ban+ong+bay+toi',
+            title: 'Bạn ong bay tới',
+            caption: 'Miu vẫy tay khi nghe tiếng vo ve rất nhỏ.',
+            blanks: [{
+                id: 'page2-blank1',
+                prompt: 'Bạn nào bay đến chơi với Miu?',
+                segment_before: 'Bất ngờ, một chú ',
+                segment_after: ' nhỏ bay đến và muốn ngửi mùi hoa cùng Miu.',
+                correct_flashcard_id: 'bee',
+                distractor_ids: ['fish', 'bird', 'dog']
+            }]
+        },
+        {
+            id: 'page-3',
+            page: 3,
+            emoji: '🤝',
+            illustration_image_url: 'https://placehold.co/800x520.jpg?text=Miu+chia+se+niem+vui',
+            title: 'Miu biết sẻ chia',
+            caption: 'Miu mỉm cười và mời bạn cùng ngắm hoa.',
+            blanks: [{
+                id: 'page3-blank1',
+                prompt: 'Miu muốn làm gì cùng bạn ong?',
+                segment_before: 'Miu nói: chúng mình cùng ',
+                segment_after: ' bông hoa này nhé!, rồi hai bạn cười thật tươi.',
+                correct_flashcard_id: 'admire',
+                distractor_ids: ['hide', 'sleep', 'run']
+            }]
+        }
+    ]
+};
+
+const IMAGE_URL_PATTERN = /^https?:\/\/.+\.(png|jpg|jpeg)(\?.*)?$/i;
+
+let STORY = null;
+let currentUser = null;
+let flashcardMap = new Map();
+let currentPageIndex = 0;
+let currentBlankIndex = 0;
+let totalWrongAttempts = 0;
+let swipeStartX = 0;
+
+const state = { blankAnswers: [], completedAt: null };
+
+function normalizeStory(rawStory) {
+    if (!rawStory) return null;
+    return {
+        id: rawStory.id,
+        slug: rawStory.slug || rawStory.id,
+        title: rawStory.title,
+        targetLanguage: rawStory.target_language || rawStory.targetLanguage,
+        rewardSticker: rawStory.reward_sticker || rawStory.rewardSticker || 'Sticker ngo nghinh',
+        nextSuggestion: rawStory.next_story_slug || rawStory.nextSuggestion || 'mot cau chuyen moi',
+        flashcards: (rawStory.flashcards || []).map(card => ({
+            ...card,
+            language_code: card.language_code || card.language
+        })),
+        pages: (rawStory.pages || []).map((page, pageIndex) => ({
+            id: page.id || `page-${pageIndex + 1}`,
+            page: page.page_number || page.page || pageIndex + 1,
+            emoji: page.illustration_emoji || page.emoji || '📖',
+            illustrationImageUrl: page.illustration_image_url || page.illustrationImageUrl || '',
+            title: page.illustration_title || page.title,
+            caption: page.illustration_caption || page.caption || '',
+            blanks: (page.blanks || []).map((blank, blankIndex) => ({
+                id: blank.id || `blank-${pageIndex + 1}-${blankIndex + 1}`,
+                prompt: blank.prompt_text || blank.prompt,
+                segment_before: blank.segment_before,
+                segment_after: blank.segment_after,
+                correct_flashcard_id: blank.correct_flashcard_id,
+                distractor_ids: blank.distractor_ids || [blank.distractor_1_id, blank.distractor_2_id, blank.distractor_3_id].filter(Boolean),
+                flashcards: blank.flashcards || []
+            }))
+        }))
+    };
+}
+
+function validateStory(story) {
+    if (!Array.isArray(story.flashcards) || story.flashcards.length === 0 || story.flashcards.length > 50) {
+        throw new Error('Bo flashcard phai co tu 1 den 50 card.');
+    }
+    if (!Array.isArray(story.pages) || story.pages.length === 0 || story.pages.length > 20) {
+        throw new Error('Cau chuyen phai co tu 1 den 20 trang.');
+    }
+
+    const localCardMap = new Map();
+    story.flashcards.forEach(card => {
+        if (typeof card.word !== 'string' || card.word.trim().length < 1 || card.word.trim().length > 50) {
+            throw new Error(`Flashcard ${card.id} co word khong hop le.`);
+        }
+        if (typeof card.image_url !== 'string' || !IMAGE_URL_PATTERN.test(card.image_url)) {
+            throw new Error(`Flashcard ${card.id} can image_url PNG/JPG hop le.`);
+        }
+        localCardMap.set(card.id, card);
+    });
+
+    story.pages.forEach(page => {
+        if (!Array.isArray(page.blanks) || page.blanks.length === 0 || page.blanks.length > 3) {
+            throw new Error(`Trang ${page.page} phai co tu 1 den 3 blank.`);
+        }
+        page.blanks.forEach(blank => {
+            if (!blank.correct_flashcard_id || !Array.isArray(blank.distractor_ids) || blank.distractor_ids.length !== 3) {
+                throw new Error(`Blank ${blank.id} phai co 1 dap an dung va 3 distractor.`);
+            }
+            if (new Set(blank.distractor_ids).size !== 3 || blank.distractor_ids.includes(blank.correct_flashcard_id)) {
+                throw new Error(`Blank ${blank.id} co distractor bi trung.`);
+            }
+
+            const allCards = [blank.correct_flashcard_id, ...blank.distractor_ids].map(id => localCardMap.get(id));
+            if (allCards.some(card => !card)) throw new Error(`Blank ${blank.id} tham chieu flashcard khong ton tai.`);
+            if (allCards.some(card => card.language_code !== story.targetLanguage)) {
+                throw new Error(`Blank ${blank.id} can 4 flashcard cung ngon ngu dich.`);
+            }
+        });
+    });
+}
+
+function shuffle(items) {
+    const arr = [...items];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function getStorySlug() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('story') || DEFAULT_STORY.slug;
+}
+
+function getCurrentPage() {
+    return STORY.pages[currentPageIndex];
+}
+
+function getCurrentBlank() {
+    return getCurrentPage().blanks[currentBlankIndex];
+}
+
+function getTotalBlankCount() {
+    return STORY.pages.reduce((sum, page) => sum + page.blanks.length, 0);
+}
+
+function getSolvedBlankCount() {
+    return state.blankAnswers.filter(answer => answer.is_correct).length;
+}
+
+function getBlankAttemptCount(blankId) {
+    return state.blankAnswers.filter(answer => answer.story_blank_id === blankId).length;
+}
+
+function isBlankSolved(blankId) {
+    return state.blankAnswers.some(answer => answer.story_blank_id === blankId && answer.is_correct);
+}
+
+function areAllBlanksSolvedOnPage(page) {
+    return page.blanks.every(blank => isBlankSolved(blank.id));
+}
+
+function updateCurrentBlankIndex() {
+    const page = getCurrentPage();
+    const nextIndex = page.blanks.findIndex(blank => !isBlankSolved(blank.id));
+    currentBlankIndex = nextIndex === -1 ? Math.max(page.blanks.length - 1, 0) : nextIndex;
+}
+
+async function loadProgress() {
+    if (!currentUser || !STORY?.id || STORY.id === DEFAULT_STORY.id) return;
+    const [progress, answers] = await Promise.all([
+        DB.getStoryProgress(currentUser.id, STORY.id),
+        DB.getBlankAnswers(currentUser.id, STORY.id)
+    ]);
+    currentPageIndex = Math.min(Math.max((progress?.current_page || 1) - 1, 0), STORY.pages.length - 1);
+    totalWrongAttempts = progress?.wrong_attempts || 0;
+    state.blankAnswers = answers || [];
+    state.completedAt = progress?.completed_at || null;
+}
+
+async function saveProgress() {
+    if (!currentUser || !STORY?.id || STORY.id === DEFAULT_STORY.id) return;
+    await DB.upsertStoryProgress(currentUser.id, STORY.id, {
+        current_page: currentPageIndex + 1,
+        wrong_attempts: totalWrongAttempts,
+        completed_blanks: getSolvedBlankCount(),
+        completed_at: state.completedAt
+    });
+}
+
+function stopSpeech() {
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+
+function speakText(text, onEnd) {
+    stopSpeech();
+    if (!('speechSynthesis' in window)) {
+        if (onEnd) onEnd();
+        return;
+    }
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'vi-VN';
+    utterance.rate = 0.92;
+    utterance.pitch = 1.03;
+    utterance.onend = () => { if (onEnd) onEnd(); };
+    window.speechSynthesis.speak(utterance);
+}
+
+function playFlashcardAudio(card, onEnd) {
+    if (card.audio_url) {
+        const audio = new Audio(card.audio_url);
+        audio.addEventListener('ended', () => onEnd && onEnd(), { once: true });
+        audio.addEventListener('error', () => speakText(card.word, onEnd), { once: true });
+        audio.play().catch(() => speakText(card.word, onEnd));
+        return;
+    }
+    speakText(card.word, onEnd);
+}
+
+function updateProgressUI() {
+    document.getElementById('page-counter').textContent = `Trang ${currentPageIndex + 1}/${STORY.pages.length}`;
+    document.getElementById('progress-bar').style.width = `${((currentPageIndex + 1) / STORY.pages.length) * 100}%`;
+    document.getElementById('blank-counter').textContent = `Ô trống ${Math.min(getSolvedBlankCount() + 1, getTotalBlankCount())}/${getTotalBlankCount()}`;
+    document.getElementById('attempt-counter').textContent = `Lượt sai: ${totalWrongAttempts}`;
+}
+
+function renderStoryText(activePartKey) {
+    const page = getCurrentPage();
+    const html = [];
+    page.blanks.forEach((blank, index) => {
+        const solvedAnswer = state.blankAnswers.find(answer => answer.story_blank_id === blank.id && answer.is_correct);
+        const solvedCard = solvedAnswer ? flashcardMap.get(solvedAnswer.chosen_flashcard_id) : null;
+        const beforeClass = activePartKey === `before-${index}` ? 'story-segment active' : 'story-segment';
+        const blankClass = activePartKey === `blank-${index}` ? 'story-segment active' : 'story-segment';
+        const afterClass = activePartKey === `after-${index}` ? 'story-segment active' : 'story-segment';
+        html.push(`<span class="inline rounded-xl px-1 py-0.5 ${beforeClass}">${blank.segment_before}</span>`);
+        html.push(`<span class="inline-flex items-center px-2 py-1 rounded-xl font-bold bg-primary-container/70 text-on-primary-container ${blankClass}">${solvedCard ? solvedCard.word : '_____ '}</span>`);
+        html.push(`<span class="inline rounded-xl px-1 py-0.5 ${afterClass}">${blank.segment_after}</span>`);
+    });
+    document.getElementById('story-text').innerHTML = html.join(' ');
+    document.getElementById('blank-status').classList.toggle('hidden', state.completedAt || areAllBlanksSolvedOnPage(page));
+}
+
+function getOptionsForBlank(blank) {
+    const cards = blank.flashcards?.length
+        ? blank.flashcards
+        : [blank.correct_flashcard_id, ...blank.distractor_ids].map(id => flashcardMap.get(id));
+    return shuffle(cards.filter(Boolean));
+}
+
+function renderFlashcards() {
+    const blank = getCurrentBlank();
+    const grid = document.getElementById('flashcard-grid');
+    document.getElementById('flashcard-panel').classList.remove('hidden');
+    document.getElementById('feedback-text').textContent = blank.prompt;
+    grid.innerHTML = '';
+
+    getOptionsForBlank(blank).forEach(card => {
+        const button = document.createElement('button');
+        button.className = 'flashcard rounded-xl bg-surface-container-low p-3 text-left active:scale-[0.98] transition-all duration-200';
+        button.innerHTML = `
+            <img src="${card.image_url}" alt="${card.word}" class="w-full aspect-square rounded-lg object-cover mb-3" />
+            <div class="font-bold text-on-surface text-lg">${card.word}</div>
+            <div class="text-sm text-on-surface-variant mt-1">Cham de nghe tu nay</div>
+        `;
+        button.addEventListener('click', () => handleFlashcardChoice(blank, card, button));
+        grid.appendChild(button);
+    });
+}
+
+function hideFlashcards() {
+    document.getElementById('flashcard-panel').classList.add('hidden');
+}
+
+function enableNextPageIfReady() {
+    const ready = areAllBlanksSolvedOnPage(getCurrentPage()) && currentPageIndex < STORY.pages.length - 1 && !state.completedAt;
+    document.getElementById('btn-next-page').disabled = !ready;
+}
+
+function renderPage() {
+    const page = getCurrentPage();
+    updateCurrentBlankIndex();
+    const illustrationImage = document.getElementById('illustration-image');
+    illustrationImage.src = page.illustrationImageUrl || 'https://placehold.co/800x520.jpg?text=Minh+hoa+cau+chuyen';
+    illustrationImage.alt = page.title;
+    document.getElementById('illustration-emoji').textContent = page.emoji;
+    document.getElementById('illustration-title').textContent = page.title;
+    document.getElementById('illustration-caption').textContent = page.caption;
+    document.querySelector('h1').textContent = STORY.title;
+    document.getElementById('btn-replay-answer').disabled = !isBlankSolved(getCurrentBlank().id);
+    document.getElementById('progress-copy').textContent = areAllBlanksSolvedOnPage(page) ? 'Co the vuot sang trang moi' : 'Nghe va dien tu vao o trong';
+    renderStoryText(null);
+    updateProgressUI();
+    enableNextPageIfReady();
+
+    if (state.completedAt) {
+        hideFlashcards();
+        showCompletion();
+        return;
+    }
+
+    if (areAllBlanksSolvedOnPage(page)) hideFlashcards();
+    else renderFlashcards();
+}
+
+function readSegmentSequence() {
+    const blankIndex = currentBlankIndex;
+    const blank = getCurrentBlank();
+    renderStoryText(`before-${blankIndex}`);
+    speakText(blank.segment_before, () => {
+        renderStoryText(`blank-${blankIndex}`);
+        renderFlashcards();
+        document.getElementById('progress-copy').textContent = 'Dừng lại để chọn từ đúng';
+    });
+}
+
+function continueAfterCorrect(card) {
+    const blankIndex = currentBlankIndex;
+    const blank = getCurrentBlank();
+    renderStoryText(`blank-${blankIndex}`);
+    playFlashcardAudio(card, () => {
+        renderStoryText(`after-${blankIndex}`);
+        speakText(blank.segment_after, async () => {
+            updateCurrentBlankIndex();
+            await saveProgress();
+
+            if (areAllBlanksSolvedOnPage(getCurrentPage())) {
+                renderStoryText(null);
+                document.getElementById('progress-copy').textContent = currentPageIndex === STORY.pages.length - 1 ? 'Đã xong trang cuối, xem kết quả nhé' : 'Vượt sang trang mới để kể tiếp';
+                if (currentPageIndex === STORY.pages.length - 1) {
+                    await completeStory();
+                } else {
+                    hideFlashcards();
+                    enableNextPageIfReady();
+                }
+                return;
+            }
+
+            renderPage();
+            readSegmentSequence();
+        });
+    });
+}
+
+async function persistBlankAnswer(blank, chosenCardId, isCorrect) {
+    if (!currentUser || !STORY?.id || STORY.id === DEFAULT_STORY.id) {
+        return {
+            story_blank_id: blank.id,
+            chosen_flashcard_id: chosenCardId,
+            correct_flashcard_id: blank.correct_flashcard_id,
+            is_correct: isCorrect,
+            attempt_number: getBlankAttemptCount(blank.id) + 1,
+            answered_at: new Date().toISOString()
+        };
+    }
+
+    return DB.saveBlankAnswer(
+        currentUser.id,
+        STORY.id,
+        getCurrentPage().id,
+        blank.id,
+        chosenCardId,
+        blank.correct_flashcard_id,
+        isCorrect
+    );
+}
+
+async function handleFlashcardChoice(blank, card, button) {
+    const flashcards = document.querySelectorAll('.flashcard');
+    flashcards.forEach(item => item.classList.remove('flashcard-correct', 'flashcard-wrong'));
+
+    if (card.id === blank.correct_flashcard_id) {
+        button.classList.add('flashcard-correct');
+        document.getElementById('btn-replay-answer').disabled = false;
+        document.getElementById('feedback-text').textContent = `Chính xác! Từ đúng là "${card.word}".`;
+        try {
+            const answer = await persistBlankAnswer(blank, card.id, true);
+            state.blankAnswers.push(answer);
+            await saveProgress();
+            continueAfterCorrect(card);
+        } catch (error) {
+            console.error('Save correct blank answer error:', error);
+            alert('Không lưu được đáp án. Vui lòng thử lại.');
+        }
+        return;
+    }
+
+    totalWrongAttempts += 1;
+    playFlashcardAudio(card);
+    button.classList.add('flashcard-wrong');
+    document.getElementById('feedback-text').textContent = 'Chưa đúng rồi. Mình thử lại nhé!';
+    try {
+        const answer = await persistBlankAnswer(blank, card.id, false);
+        state.blankAnswers.push(answer);
+        updateProgressUI();
+        await saveProgress();
+    } catch (error) {
+        console.error('Save wrong blank answer error:', error);
+    }
+}
+
+async function nextPage() {
+    if (currentPageIndex >= STORY.pages.length - 1) return;
+    stopSpeech();
+    currentPageIndex += 1;
+    currentBlankIndex = 0;
+    await saveProgress();
+    renderPage();
+}
+
+async function completeStory() {
+    state.completedAt = new Date().toISOString();
+    await saveProgress();
+    showCompletion();
+}
+
+function showCompletion() {
+    document.getElementById('completion-score').textContent = `Điểm: ${getSolvedBlankCount()}/${getTotalBlankCount()} | Sai: ${totalWrongAttempts}`;
+    document.getElementById('reward-text').textContent = `Nhận được sticker: ${STORY.rewardSticker}.`;
+    document.getElementById('completion-panel').classList.remove('hidden');
+    document.getElementById('btn-next-page').disabled = true;
+    document.getElementById('progress-copy').textContent = 'Con vừa hoàn thành câu chuyện';
+}
+
+function replayCorrectAnswer() {
+    const blank = getCurrentBlank();
+    const answer = state.blankAnswers.find(item => item.story_blank_id === blank.id && item.is_correct);
+    if (!answer) return;
+    const card = flashcardMap.get(answer.chosen_flashcard_id);
+    if (card) playFlashcardAudio(card);
+}
+
+async function resetProgress() {
+    stopSpeech();
+    if (!confirm('Đặt lại tiến độ câu chuyện này?')) return;
+
+    if (currentUser && STORY?.id && STORY.id !== DEFAULT_STORY.id) {
+        try {
+            const { error: answersError } = await supabaseClient.from('blank_answers').delete().eq('child_id', currentUser.id).eq('story_id', STORY.id);
+            if (answersError) throw answersError;
+            const { error: progressError } = await supabaseClient.from('child_story_progress').delete().eq('child_id', currentUser.id).eq('story_id', STORY.id);
+            if (progressError) throw progressError;
+        } catch (error) {
+            console.error('Reset story progress error:', error);
+            alert('Không đặt lại được tiến độ.');
+            return;
+        }
+    }
+
+    currentPageIndex = 0;
+    currentBlankIndex = 0;
+    totalWrongAttempts = 0;
+    state.blankAnswers = [];
+    state.completedAt = null;
+    renderPage();
+}
+
+function bindSwipeGesture() {
+    const stage = document.getElementById('story-stage');
+    stage.addEventListener('touchstart', event => {
+        swipeStartX = event.changedTouches[0].clientX;
+    }, { passive: true });
+    stage.addEventListener('touchend', event => {
+        const delta = swipeStartX - event.changedTouches[0].clientX;
+        if (delta > 60 && !document.getElementById('btn-next-page').disabled) nextPage();
+    }, { passive: true });
+}
+
+document.getElementById('btn-back').addEventListener('click', () => {
+    stopSpeech();
+    window.location.href = 'lessons.html';
+});
+document.getElementById('btn-read-story').addEventListener('click', () => {
+    if (!state.completedAt) readSegmentSequence();
+});
+document.getElementById('btn-next-page').addEventListener('click', nextPage);
+document.getElementById('btn-replay-answer').addEventListener('click', replayCorrectAnswer);
+document.getElementById('btn-reset-progress').addEventListener('click', resetProgress);
+document.getElementById('btn-restart').addEventListener('click', resetProgress);
+
+async function bootstrapStory() {
+    const session = await DB.getSession();
+    currentUser = session?.user || null;
+
+    const slug = getStorySlug();
+    let loadedStory = null;
+    try {
+        loadedStory = await DB.getStoryBundleBySlug(slug);
+    } catch (error) {
+        console.error('Story bundle load error:', error);
+    }
+
+    STORY = normalizeStory(loadedStory || DEFAULT_STORY);
+    validateStory(STORY);
+    flashcardMap = new Map(STORY.flashcards.map(card => [card.id, card]));
+    await loadProgress();
+    renderPage();
+    bindSwipeGesture();
+}
+
+bootstrapStory();
+</script>
+</body></html>

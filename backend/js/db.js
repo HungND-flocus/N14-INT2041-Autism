@@ -131,6 +131,176 @@ const DB = {
         return data;
     },
 
+    // ==================== STORIES ====================
+    async getStoryBySlug(slug) {
+        const { data, error } = await supabaseClient
+            .from('stories')
+            .select('*')
+            .eq('slug', slug)
+            .eq('is_published', true)
+            .maybeSingle();
+        if (error) throw error;
+        return data;
+    },
+
+    async getStoryPages(storyId) {
+        const { data, error } = await supabaseClient
+            .from('story_pages')
+            .select('*')
+            .eq('story_id', storyId)
+            .order('page_number', { ascending: true });
+        if (error) throw error;
+        return data || [];
+    },
+
+    async getStoryBlanks(pageIds) {
+        if (!pageIds || pageIds.length === 0) return [];
+        const { data, error } = await supabaseClient
+            .from('story_blanks')
+            .select('*')
+            .in('story_page_id', pageIds)
+            .order('blank_order', { ascending: true });
+        if (error) throw error;
+        return data || [];
+    },
+
+    async getFlashcardsByIds(ids) {
+        const uniqueIds = [...new Set((ids || []).filter(Boolean))];
+        if (uniqueIds.length === 0) return [];
+        const { data, error } = await supabaseClient
+            .from('flashcards')
+            .select('*')
+            .in('id', uniqueIds);
+        if (error) throw error;
+        return data || [];
+    },
+
+    async getStoryBundleBySlug(slug) {
+        const story = await this.getStoryBySlug(slug);
+        if (!story) return null;
+
+        const pages = await this.getStoryPages(story.id);
+        const pageIds = pages.map(page => page.id);
+        const blanks = await this.getStoryBlanks(pageIds);
+        const flashcardIds = blanks.flatMap(blank => [
+            blank.correct_flashcard_id,
+            blank.distractor_1_id,
+            blank.distractor_2_id,
+            blank.distractor_3_id
+        ]);
+        const flashcards = await this.getFlashcardsByIds(flashcardIds);
+        const flashcardMap = new Map(flashcards.map(card => [card.id, card]));
+        const blanksByPageId = new Map();
+
+        blanks.forEach(blank => {
+            const pageBlanks = blanksByPageId.get(blank.story_page_id) || [];
+            pageBlanks.push({
+                ...blank,
+                distractor_ids: [blank.distractor_1_id, blank.distractor_2_id, blank.distractor_3_id],
+                flashcards: [
+                    flashcardMap.get(blank.correct_flashcard_id),
+                    flashcardMap.get(blank.distractor_1_id),
+                    flashcardMap.get(blank.distractor_2_id),
+                    flashcardMap.get(blank.distractor_3_id)
+                ].filter(Boolean)
+            });
+            blanksByPageId.set(blank.story_page_id, pageBlanks);
+        });
+
+        return {
+            ...story,
+            flashcards,
+            pages: pages.map(page => ({
+                ...page,
+                blanks: (blanksByPageId.get(page.id) || []).sort((a, b) => a.blank_order - b.blank_order)
+            }))
+        };
+    },
+
+    async getStoryProgress(childId, storyId) {
+        const { data, error } = await supabaseClient
+            .from('child_story_progress')
+            .select('*')
+            .eq('child_id', childId)
+            .eq('story_id', storyId)
+            .maybeSingle();
+        if (error) throw error;
+        return data;
+    },
+
+    async getBlankAnswers(childId, storyId) {
+        const { data, error } = await supabaseClient
+            .from('blank_answers')
+            .select('*')
+            .eq('child_id', childId)
+            .eq('story_id', storyId)
+            .order('answered_at', { ascending: true });
+        if (error) throw error;
+        return data || [];
+    },
+
+    async getBlankAnswersForBlank(childId, storyBlankId) {
+        const { data, error } = await supabaseClient
+            .from('blank_answers')
+            .select('*')
+            .eq('child_id', childId)
+            .eq('story_blank_id', storyBlankId)
+            .order('attempt_number', { ascending: true });
+        if (error) throw error;
+        return data || [];
+    },
+
+    async upsertStoryProgress(childId, storyId, updates) {
+        const existing = await this.getStoryProgress(childId, storyId);
+        const payload = {
+            child_id: childId,
+            story_id: storyId,
+            ...updates,
+            last_played_at: new Date().toISOString()
+        };
+
+        if (existing) {
+            const { data, error } = await supabaseClient
+                .from('child_story_progress')
+                .update(payload)
+                .eq('id', existing.id)
+                .select()
+                .single();
+            if (error) throw error;
+            return data;
+        }
+
+        const { data, error } = await supabaseClient
+            .from('child_story_progress')
+            .insert(payload)
+            .select()
+            .single();
+        if (error) throw error;
+        return data;
+    },
+
+    async saveBlankAnswer(childId, storyId, storyPageId, storyBlankId, chosenFlashcardId, correctFlashcardId, isCorrect) {
+        const previousAnswers = await this.getBlankAnswersForBlank(childId, storyBlankId);
+        const attemptNumber = previousAnswers.length + 1;
+
+        const { data, error } = await supabaseClient
+            .from('blank_answers')
+            .insert({
+                child_id: childId,
+                story_id: storyId,
+                story_page_id: storyPageId,
+                story_blank_id: storyBlankId,
+                chosen_flashcard_id: chosenFlashcardId,
+                correct_flashcard_id: correctFlashcardId,
+                is_correct: isCorrect,
+                attempt_number: attemptNumber
+            })
+            .select()
+            .single();
+        if (error) throw error;
+        return data;
+    },
+
     // ==================== PROGRESS ====================
     async getProgressForUser(userId) {
         const { data, error } = await supabaseClient
